@@ -71,10 +71,18 @@ var requestHelper = __webpack_require__(1)
 var teamsUrl = 'http://api.football-data.org/v1/competitions/445/teams'
 var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
+var MapWrapper = __webpack_require__(2)
 
+
+var initMap = function() {
+  var mainMap = new MapWrapper()
+}
 
 window.addEventListener("DOMContentLoaded", function() {
   requestHelper.getRequest(teamsUrl, null, apitoken, apikey)
+
+ initMap();
+
 })
 
 
@@ -102,6 +110,21 @@ var requestHelper = {
 }
 
 module.exports = requestHelper
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+var MapWrapper = function() {
+  var container = document.getElementById('main-map');
+  this.googleMap = new google.maps.Map( container, {
+    center: {lat: 40, lng: 50},
+    zoom: 10
+  })
+}
+
+module.exports = MapWrapper;
 
 
 /***/ })
