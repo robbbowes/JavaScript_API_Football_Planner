@@ -1,10 +1,10 @@
 {
   "name": "javascript_api_football_planner",
   "version": "1.0.0",
-  "main": "seed_data.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "mocha specs",
-    "build": "webpack -w"
+    "build": "cd client && webpack -w"
   },
   "repository": {
     "type": "git",

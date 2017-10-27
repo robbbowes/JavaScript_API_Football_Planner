@@ -4,6 +4,7 @@ var app = express();
 var club_router = require("./controller/teams_controller.js");
 
 app.use("/api/clubExtras", club_router);
+app.use(express.static(__dirname + '/../client/build'))
 
 app.listen(3000, function () {
   console.log("App running");
