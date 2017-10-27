@@ -65,6 +65,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+<<<<<<< HEAD
 /***/ (function(module, exports, __webpack_require__) {
 
 var requestHelper = __webpack_require__(1)
@@ -102,6 +103,10 @@ var requestHelper = {
 }
 
 module.exports = requestHelper
+=======
+/***/ (function(module, exports) {
+
+>>>>>>> develop
 
 
 /***/ })
