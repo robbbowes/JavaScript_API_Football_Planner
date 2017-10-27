@@ -73,16 +73,26 @@ var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
 var MapWrapper = __webpack_require__(2)
 
+var populateDropdown = function(information) {
+  var select = document.querySelector('#team-dropdown');
+  while (select.firstChild) { select.removeChild(select.firstChild) }
+  var teams = information.teams;
+  teams.forEach(function(team) {
+    var option = document.createElement("option");
+    option.innerText = team.name;
+    option.value = JSON.stringify(team);
+    select.appendChild(option);
+  })
+}
 
 var initMap = function() {
   var mainMap = new MapWrapper()
 }
 
 window.addEventListener("DOMContentLoaded", function() {
-  requestHelper.getRequest(teamsUrl, null, apitoken, apikey)
+  requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey)
 
- initMap();
-
+initMap();
 })
 
 
@@ -103,6 +113,7 @@ var requestHelper = {
     var jsonString = xhr.responseText
     var data = JSON.parse(jsonString)
     console.log(data);
+    callback(data)
   })
   xhr.send()
 },
