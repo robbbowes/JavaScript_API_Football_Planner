@@ -119,8 +119,8 @@ module.exports = requestHelper
 var MapWrapper = function() {
   var container = document.getElementById('main-map');
   this.googleMap = new google.maps.Map( container, {
-    center: {lat: 40, lng: 50},
-    zoom: 10
+    center: {lat: 53.4808, lng: 2.2426},
+    zoom: 6
   })
 }
 
