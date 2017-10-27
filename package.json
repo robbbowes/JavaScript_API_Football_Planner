@@ -18,5 +18,8 @@
   "homepage": "https://github.com/robbbowes/JavaScript_API_Football_Planner#readme",
   "devDependencies": {
     "mocha": "^4.0.1"
+  },
+  "dependencies": {
+    "mongodb": "^2.2.33"
   }
 }
