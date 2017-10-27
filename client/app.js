@@ -4,6 +4,31 @@ var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
 var MapWrapper = require('./views/mapWrapper.js')
 
+var getTeamCrest = function(crestImg, fixture) {
+  var url = fixture._links.homeTeam.href;
+  requestHelper.getRequest(url, function(team) {
+    crestImg.src = team.crestUrl;
+  }, apitoken, apikey)
+}
+
+var populateFixturesList = function(team, upcomingFixtures) {
+  var ul = document.querySelector("#away-fixtures-list");
+  while (ul.firstChild) { ul.removeChild(ul.firstChild) }
+  upcomingFixtures.forEach(function(fixture) {
+    var li = document.createElement("li");
+    var fixtureDiv = document.createElement("div");
+    var homeTeamName = document.createElement("h5");
+    homeTeamName.innerText = fixture.homeTeamName;
+    var homeTeamCrest = document.createElement("img");
+    homeTeamCrest.classList += "crest";
+    getTeamCrest(homeTeamCrest, fixture);
+    ul.appendChild(li);
+    li.appendChild(fixtureDiv);
+    fixtureDiv.appendChild(homeTeamName);
+    fixtureDiv.appendChild(homeTeamCrest);
+  });
+}
+
 var getSelectedTeamFixtures = function(teams) {
   var select = document.querySelector("#team-dropdown");
   select.addEventListener("change", function() {
@@ -14,7 +39,7 @@ var getSelectedTeamFixtures = function(teams) {
         return fixture.homeTeamName !== team.name
               && fixture.status !== "FINISHED";
       });
-      console.log(upcomingFixtures);
+      populateFixturesList(team, upcomingFixtures)
     }, apitoken, apikey)
   })
 }
@@ -39,5 +64,5 @@ var initMap = function() {
 window.addEventListener("DOMContentLoaded", function() {
   requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey)
 
-initMap();
+// initMap();
 })
