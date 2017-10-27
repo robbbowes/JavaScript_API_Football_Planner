@@ -7,7 +7,7 @@ describe('Database', function() {
   assert.strictEqual();
   });
 
-  it('should be able to get on item by club name', function () {
+  it('should be able to get a club object by club name', function () {
   assert.strictEqual();
   });
 

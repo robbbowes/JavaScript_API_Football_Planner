@@ -184,5 +184,3 @@ db.teams.insert([
     ticketLink: "https://www.whufc.com/tickets/match-tickets"
   }
 ])
-
-db.teams.find()
