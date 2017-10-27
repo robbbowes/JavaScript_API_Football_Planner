@@ -3,7 +3,7 @@ var requestHelper = {
   getRequest: function(url, callback, token, key) {
   var xhr = new XMLHttpRequest()
   xhr.open('GET', url)
-  if (key !== null) {
+  if (token && key !== null) {
     xhr.setRequestHeader(token, key)
   }
 

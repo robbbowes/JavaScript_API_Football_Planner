@@ -74,7 +74,7 @@ var apikey = '16bf6721521f4342aca8f7c7656dff95'
 
 
 window.addEventListener("DOMContentLoaded", function() {
-  requestHelper.getRequest(teamsUrl, null, token, apikey)
+  requestHelper.getRequest(teamsUrl, null, apitoken, apikey)
 })
 
 
@@ -87,7 +87,7 @@ var requestHelper = {
   getRequest: function(url, callback, token, key) {
   var xhr = new XMLHttpRequest()
   xhr.open('GET', url)
-  if (key !== null) {
+  if (token && key !== null) {
     xhr.setRequestHeader(token, key)
   }
 
