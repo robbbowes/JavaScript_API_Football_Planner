@@ -1,0 +1,22 @@
+{
+  "name": "javascript_api_football_planner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "seed_data.js",
+  "scripts": {
+    "test": "mocha specs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robbbowes/JavaScript_API_Football_Planner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robbbowes/JavaScript_API_Football_Planner/issues"
+  },
+  "homepage": "https://github.com/robbbowes/JavaScript_API_Football_Planner#readme",
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  }
+}
