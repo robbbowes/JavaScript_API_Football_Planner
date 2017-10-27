@@ -93,4 +93,94 @@ db.teams.insert([
     ]
     ticketLink: "http://www.liverpoolfc.com/tickets/tickets-availability"
   },
+  {
+    name: "Manchester City FC",
+    stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/etihad-cover.jpg",
+    latLng: [
+      53.4831381,
+      -2.2003953
+    ]
+    ticketLink: "https://tickets.mancity.com/"
+  },
+  {
+    name: "Manchester United FC",
+    stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/old-trafford-cover.jpg",
+    latLng: [
+      53.4630589,
+      -2.2913401
+    ]
+    ticketLink: "https://tickets.mancity.com/"
+  },
+  {
+    name: "Newcastle United FC",
+    stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/st-james-park-cover.jpg",
+    latLng: [
+      54.975556,
+      -1.621667
+    ]
+    ticketLink: "https://tickets.nufc.co.uk/"
+  },
+  {
+    name: "Southampton FC",
+    stadiumPicture: "https://footballtripper.com/wp-content/uploads/2014/08/St.jpg",
+    latLng: [
+      50.9058218,
+      -1.390954
+    ]
+    ticketLink: "https://southamptonfc.com/tickets/match-tickets"
+  },
+  {
+    name: "Stoke City FC",
+    stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/britannia-stadium-cover.jpg",
+    latLng: [
+      52.9881046,
+      -2.1764298
+    ]
+    ticketLink: "http://www.stokecityfc.com/tickets"
+  },
+  {
+    name: "Swansea City FC",
+    stadiumPicture: "https://footballtripper.com/wp-content/uploads/2014/08/liberty-stadium-guide.jpg",
+    latLng: [
+      51.6427499,
+      -3.9345855
+    ]
+    ticketLink: "https://www.eticketing.co.uk/swanstickets"
+  },
+  {
+    name: "Tottenham Hotspur FC",
+    stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/white-hart-lane-cover.jpg",
+    latLng: [
+      51.6032123,
+      -0.0657389
+    ]
+    ticketLink: "https://www.eticketing.co.uk/tottenhamhotspur/Events/Index"
+  },
+  {
+    name: "Watford FC",
+    stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/vicarage-road-cover.jpg",
+    latLng: [
+      51.6499828,
+      -0.4016876
+    ]
+    ticketLink: "https://www.eticketing.co.uk/watfordfc/default.aspx"
+  },
+  {
+    name: "West Bromwich Albion FC",
+    stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/hawthorns-stadium-cover.jpg",
+    latLng: [
+      52.509038,
+      -1.963938
+    ]
+    ticketLink: "https://www.wba.co.uk/tickets/"
+  },
+  {
+    name: "West Ham United FC",
+    stadiumPicture: "https://footballtripper.com/wp-content/uploads/2014/07/west-ham-olympic-stadium-cgi-render.jpg",
+    latLng: [
+      51.5387095,
+      -0.0166037
+    ]
+    ticketLink: "https://www.whufc.com/tickets/match-tickets"
+  }
 ])
