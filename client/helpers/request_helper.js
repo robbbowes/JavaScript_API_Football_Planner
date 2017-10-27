@@ -1,13 +1,16 @@
 var requestHelper = {
 
-  getRequest: function(url, callback) {
+  getRequest: function(url, callback, token, key) {
   var xhr = new XMLHttpRequest()
   xhr.open('GET', url)
+  if (key !== null) {
+    xhr.setRequestHeader(token, key)
+  }
 
   xhr.addEventListener('load', function() {
     var jsonString = xhr.responseText
     var data = JSON.parse(jsonString)
-    callback(data)
+    console.log(data);
   })
   xhr.send()
 },

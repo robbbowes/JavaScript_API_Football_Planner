@@ -68,10 +68,13 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 var requestHelper = __webpack_require__(1)
+var teamsUrl = 'http://api.football-data.org/v1/competitions/445/teams'
+var apitoken = 'X-Auth-Token'
+var apikey = '16bf6721521f4342aca8f7c7656dff95'
 
 
 window.addEventListener("DOMContentLoaded", function() {
-  
+  requestHelper.getRequest(teamsUrl, null, token, apikey)
 })
 
 
@@ -81,14 +84,17 @@ window.addEventListener("DOMContentLoaded", function() {
 
 var requestHelper = {
 
-  getRequest: function(url, callback) {
+  getRequest: function(url, callback, token, key) {
   var xhr = new XMLHttpRequest()
   xhr.open('GET', url)
+  if (key !== null) {
+    xhr.setRequestHeader(token, key)
+  }
 
   xhr.addEventListener('load', function() {
     var jsonString = xhr.responseText
     var data = JSON.parse(jsonString)
-    callback(data)
+    console.log(data);
   })
   xhr.send()
 },
