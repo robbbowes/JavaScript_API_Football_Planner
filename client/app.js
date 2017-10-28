@@ -88,8 +88,14 @@ var populateDropdown = function(information) {
 }
 
 var initMap = function(team) {
-  var mainMap = new MapWrapper()
-  console.log(team);
+  requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
+    var foundTeam = dbTeams.find(function(dbTeam) {
+      return team.name === dbTeam.name;
+    });
+    var lat = foundTeam.latLng[0];
+    var lng = foundTeam.latLng[1];
+    var mainMap = new MapWrapper(lat, lng, 9);
+  });
 }
 
 window.addEventListener("DOMContentLoaded", function() {

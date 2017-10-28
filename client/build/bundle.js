@@ -183,8 +183,14 @@ var populateDropdown = function(information) {
 }
 
 var initMap = function(team) {
-  var mainMap = new MapWrapper()
-  console.log(team);
+  requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
+    var foundTeam = dbTeams.find(function(dbTeam) {
+      return team.name === dbTeam.name;
+    });
+    var lat = foundTeam.latLng[0];
+    var lng = foundTeam.latLng[1];
+    var mainMap = new MapWrapper(lat, lng, 9);
+  });
 }
 
 window.addEventListener("DOMContentLoaded", function() {
@@ -196,15 +202,15 @@ window.addEventListener("DOMContentLoaded", function() {
 /* 2 */
 /***/ (function(module, exports) {
 
-var MapWrapper = function() {
+var MapWrapper = function(lat, lng, zoom) {
   var container = document.getElementById('main-div');
   while (container.firstChild) { container.removeChild(container.firstChild) }
   var mapDiv = document.createElement("div");
   mapDiv.id = "main-map";
   container.appendChild(mapDiv);
   this.googleMap = new google.maps.Map( mapDiv, {
-    center: {lat: 53.4808, lng: 2.2426},
-    zoom: 6
+    center: {lat: lat, lng: lng},
+    zoom: zoom
   })
 }
 
