@@ -312,7 +312,10 @@ module.exports = MapWrapper;
 /***/ (function(module, exports) {
 
 var dateTimeConverter = function(string) {
+  //year
   var year = string.substring(0, 4);
+
+  //month
   var month;
   switch (string.substring(5, 7)) {
     case "01" : month = "January"; break;
@@ -326,17 +329,20 @@ var dateTimeConverter = function(string) {
     case "09" : month = "September"; break;
     case "10" : month = "October"; break;
     case "11" : month = "November"; break;
-    case "12" : month = "December"; break;
+    case "12" : month = "December";
   }
+
+  //day
   var day = string.substring(8, 10);
   if (day.substring(0, 1) === "0") { day = day.substring(1, 2)}
-  if (day === "1") {
-    day = day.concat("st");
-  } else if (day === "2") {
-    day = day.concat("nd");
-  } else if (day === "3") {
-    day = day.concat("rd");
-  } else { day = day.concat("th") }
+  switch (day) {
+    case "1" : day = day.concat("st"); break;
+    case "2" : day = day.concat("nd"); break;
+    case "3" : day = day.concat("rd"); break;
+    default  : day = day.concat("th");
+  }
+
+  //date and time
   var date = day + " " + month + " " + year;
   var time = string.substring(11, 16);
   var info = {
