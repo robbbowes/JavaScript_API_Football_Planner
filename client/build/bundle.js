@@ -63,8 +63,9 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ (function(module, exports) {
 
 var requestHelper = {
@@ -90,7 +91,8 @@ module.exports = requestHelper
 
 
 /***/ }),
-/* 1 */
+
+/***/ 1:
 /***/ (function(module, exports, __webpack_require__) {
 
 var requestHelper = __webpack_require__(0)
@@ -99,6 +101,7 @@ var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
 var MapWrapper = __webpack_require__(2)
 var getLeagueTable = __webpack_require__(3);
+var dateTimeConverter = __webpack_require__(255);
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
@@ -144,7 +147,9 @@ var populateFixturesList = function(team, upcomingFixtures) {
     homeTeamCrest.classList += "crest";
     getTeamCrest(homeTeamCrest, fixture);
     var date = document.createElement("p");
-    date.innerText = fixture.date;
+    date.innerText = dateTimeConverter(fixture.date).date;
+    var time = document.createElement("p");
+    time.innerText = dateTimeConverter(fixture.date).time;
     var directionsButton = document.createElement("button");
     directionsButton.id = "directions-button";
     directionsButton.innerText = "Stadium Location";
@@ -155,6 +160,7 @@ var populateFixturesList = function(team, upcomingFixtures) {
     fixtureDiv.appendChild(homeTeamName);
     fixtureDiv.appendChild(homeTeamCrest);
     fixtureDiv.appendChild(date);
+    fixtureDiv.appendChild(time);
     fixtureDiv.appendChild(directionsButton);
     initialiseDirectionsButton(directionsButton);
   });
@@ -281,7 +287,8 @@ window.addEventListener("DOMContentLoaded", function() {
 
 
 /***/ }),
-/* 2 */
+
+/***/ 2:
 /***/ (function(module, exports) {
 
 var MapWrapper = function(lat, lng, zoom) {
@@ -300,7 +307,51 @@ module.exports = MapWrapper;
 
 
 /***/ }),
-/* 3 */
+
+/***/ 255:
+/***/ (function(module, exports) {
+
+var dateTimeConverter = function(string) {
+  var year = string.substring(0, 4);
+  var month;
+  switch (string.substring(5, 7)) {
+    case "01" : month = "January"; break;
+    case "02" : month = "February"; break;
+    case "03" : month = "March"; break;
+    case "04" : month = "April"; break;
+    case "05" : month = "May"; break;
+    case "06" : month = "June"; break;
+    case "07" : month = "July"; break;
+    case "08" : month = "August"; break;
+    case "09" : month = "September"; break;
+    case "10" : month = "October"; break;
+    case "11" : month = "November"; break;
+    case "12" : month = "December"; break;
+  }
+  var day = string.substring(8, 10);
+  if (day.substring(0, 1) === "0") { day = day.substring(1, 2)}
+  if (day === "1") {
+    day = day.concat("st");
+  } else if (day === "2") {
+    day = day.concat("nd");
+  } else if (day === "3") {
+    day = day.concat("rd");
+  } else { day = day.concat("th") }
+  var date = day + " " + month + " " + year;
+  var time = string.substring(11, 16);
+  var info = {
+    date: date,
+    time: time
+  }
+  return info;
+}
+
+module.exports = dateTimeConverter;
+
+
+/***/ }),
+
+/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 var requestHelper = __webpack_require__(0);
@@ -368,5 +419,6 @@ module.exports = getLeagueTable
 
 
 /***/ })
-/******/ ]);
+
+/******/ });
 //# sourceMappingURL=bundle.js.map

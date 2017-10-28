@@ -4,6 +4,7 @@ var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
 var MapWrapper = require('./views/map_wrapper.js')
 var getLeagueTable = require("./views/table_view.js");
+var dateTimeConverter = require("./helpers/date_time_converter.js");
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
@@ -49,7 +50,9 @@ var populateFixturesList = function(team, upcomingFixtures) {
     homeTeamCrest.classList += "crest";
     getTeamCrest(homeTeamCrest, fixture);
     var date = document.createElement("p");
-    date.innerText = fixture.date;
+    date.innerText = dateTimeConverter(fixture.date).date;
+    var time = document.createElement("p");
+    time.innerText = dateTimeConverter(fixture.date).time;
     var directionsButton = document.createElement("button");
     directionsButton.id = "directions-button";
     directionsButton.innerText = "Stadium Location";
@@ -60,6 +63,7 @@ var populateFixturesList = function(team, upcomingFixtures) {
     fixtureDiv.appendChild(homeTeamName);
     fixtureDiv.appendChild(homeTeamCrest);
     fixtureDiv.appendChild(date);
+    fixtureDiv.appendChild(time);
     fixtureDiv.appendChild(directionsButton);
     initialiseDirectionsButton(directionsButton);
   });
