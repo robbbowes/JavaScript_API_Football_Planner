@@ -7,9 +7,8 @@ var getLeagueTable = require("./views/table_view.js");
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
-    var select = document.getElementById("team-dropdown");
-    var team = JSON.parse(select.value);
-    initMap(team);
+    var homeTeamName = directionsButton.value;
+    initMap(homeTeamName);
   });
 }
 
@@ -20,6 +19,19 @@ var getTeamCrest = function(crestImg, fixture) {
   }, apitoken, apikey)
 }
 
+var populatePreviousFixturesList = function(team, previousFixtures) {
+  var statsDiv = document.getElementById("stats-div");
+  while (statsDiv.firstChild) { statsDiv.removeChild(statsDiv.firstChild) }
+  var ul = document.createElement("ul");
+  ul.id = "previous-fixtures-list";
+  statsDiv.appendChild(ul);
+  previousFixtures.forEach(function(fixture) {
+    var li = document.createElement("li");
+    li.innerText = fixture.homeTeamName + "   " + fixture.result.goalsHomeTeam +
+      " - " + fixture.awayTeamName + "   " + fixture.result.goalsAwayTeam;
+    ul.appendChild(li);
+  })
+}
 
 var populateFixturesList = function(team, upcomingFixtures) {
   var mainDiv = document.getElementById("main-div");
@@ -41,7 +53,7 @@ var populateFixturesList = function(team, upcomingFixtures) {
     var directionsButton = document.createElement("button");
     directionsButton.id = "directions-button";
     directionsButton.innerText = "Stadium Location";
-    directionsButton.value = fixture;
+    directionsButton.value = fixture.homeTeamName;
     mainDiv.appendChild(ul);
     ul.appendChild(li);
     li.appendChild(fixtureDiv);
@@ -59,6 +71,10 @@ var getSelectedTeamFixtures = function(teams) {
     var team = JSON.parse(select.value);
     var fixturesUrl = team._links.fixtures.href;
     requestHelper.getRequest(fixturesUrl, function(info) {
+      var previousFixtures = info.fixtures.filter(function(fixture) {
+        return fixture.status === "FINISHED";
+      });
+      populatePreviousFixturesList(team, previousFixtures)
       var upcomingFixtures = info.fixtures.filter(function(fixture) {
         return fixture.homeTeamName !== team.name
               && fixture.status !== "FINISHED";
@@ -87,17 +103,83 @@ var populateDropdown = function(information) {
   getSelectedTeamFixtures(teams);
 }
 
-var initMap = function(team) {
+var initMap = function(teamName) {
   requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
+    console.log(teamName);
     var foundTeam = dbTeams.find(function(dbTeam) {
-      return team.name === dbTeam.name;
+      return teamName === dbTeam.name;
     });
     var lat = foundTeam.latLng[0];
     var lng = foundTeam.latLng[1];
-    var mainMap = new MapWrapper(lat, lng, 9);
+    var mainMap = new MapWrapper(lat, lng, 10);
   });
 }
 
 window.addEventListener("DOMContentLoaded", function() {
   requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey);
+  // var directionsService = new google.maps.DirectionsService();
+  // var directionsRenderer = new google.maps.DirectionsRenderer();
+  //
+  // var initialise = function() {
+  //   var directionsRenderer = new google.maps.DirectionsRenderer();
+  //   var mapDiv = document.createElement("div");
+  //   var container = document.getElementById("main-div");
+  //   container.appendChild(mapDiv);
+    // var map = new google.maps.Map(mapDiv, {
+    //   zoom: 7,
+    //   center: {lat: 0, lng: 0}
+    // });
+    // mapDiv.id = "test-map-div";
+  //   directionsRenderer.setMap(map);
+  //   calcRoute();
+  // }
+  //
+  // var calcRoute = function() {
+  //   var directionsRequest = {
+  //     origin: "joplin, mo",
+  //     destination: "flagstaff, az",
+  //     travelMode: "DRIVING"
+  //   }
+  //   directionsService.route(directionsRequest, function(result, status) {
+  //     directionsRenderer.setDirections(result);
+  //   })
+  // }
+  //
+  // initialise();
+
+//////////////////////////////////////////////////
+//
+//   var directionsDisplay;
+// var directionsService = new google.maps.DirectionsService();
+// var map;
+//
+// function initialize() {
+//   directionsDisplay = new google.maps.DirectionsRenderer();
+//   var chicago = new google.maps.LatLng(41.850033, -87.6500523);
+//   var mapOptions = {
+//     zoom:7,
+//     center: chicago
+//   }
+//   map = new google.maps.Map(document.getElementById('map');
+//   directionsDisplay.setMap(map);
+//   calcRoute();
+// }
+//
+// function calcRoute() {
+//   var start = document.getElementById('start').value;
+//   var end = document.getElementById('end').value;
+//   var request = {
+//     origin: start,
+//     destination: end,
+//     travelMode: 'DRIVING'
+//   };
+//   directionsService.route(request, function(result, status) {
+//     if (status == 'OK') {
+//       directionsDisplay.setDirections(result);
+//     }
+//   });
+// }
+//
+// initialize();
+
 });

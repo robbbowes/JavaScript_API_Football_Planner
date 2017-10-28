@@ -23,8 +23,16 @@ header {
 }
 
 #stats-div {
+  margin-top: 237px;
+  position: fixed;
+  margin-right: 0;
   background-color: dodgerblue;
+  /*text-align: left;*/
 }
+
+/*#previous-fixtures-list {
+  padding: 0;
+}*/
 
 #main-map {
   height: 400px;
@@ -38,11 +46,11 @@ header {
   padding-left: 10px;
 }
 
-ul {
+/*ul {
     width: 50%;
     margin: auto;
     text-align: center;
-}
+}*/
 
 #team-dropdown-div {
   background-color: dodgerblue;
@@ -98,3 +106,9 @@ ul {
 .hidden {
   display: none;
 }*/
+
+#test-map-div {
+  height: 600px;
+  width: 700px;
+  margin-top: 300px;
+}
