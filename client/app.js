@@ -2,7 +2,8 @@ var requestHelper = require('./helpers/request_helper.js')
 var teamsUrl = 'http://api.football-data.org/v1/competitions/445/teams'
 var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
-var MapWrapper = require('./views/mapWrapper.js')
+var MapWrapper = require('./views/map_wrapper.js')
+var getLeagueTable = require("./views/table_view.js");
 
 var getTeamCrest = function(crestImg, fixture) {
   var url = fixture._links.homeTeam.href;
@@ -39,8 +40,9 @@ var getSelectedTeamFixtures = function(teams) {
         return fixture.homeTeamName !== team.name
               && fixture.status !== "FINISHED";
       });
-      populateFixturesList(team, upcomingFixtures)
+      populateFixturesList(team, upcomingFixtures);
     }, apitoken, apikey)
+    getLeagueTable();
   })
 }
 
@@ -62,7 +64,5 @@ var initMap = function() {
 }
 
 window.addEventListener("DOMContentLoaded", function() {
-  requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey)
-
-// initMap();
-})
+  requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey);
+});
