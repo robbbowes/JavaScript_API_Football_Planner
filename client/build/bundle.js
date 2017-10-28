@@ -60,14 +60,41 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+var requestHelper = {
+
+  getRequest: function(url, callback, token, key) {
+  var xhr = new XMLHttpRequest()
+  xhr.open('GET', url)
+  if (token && key !== null) {
+    xhr.setRequestHeader(token, key)
+  }
+
+  xhr.addEventListener('load', function() {
+    var jsonString = xhr.responseText
+    var data = JSON.parse(jsonString)
+    console.log(data);
+    callback(data)
+  })
+  xhr.send()
+},
+
+}
+
+module.exports = requestHelper
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var requestHelper = __webpack_require__(1)
+var requestHelper = __webpack_require__(0)
 var teamsUrl = 'http://api.football-data.org/v1/competitions/445/teams'
 var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
@@ -138,33 +165,6 @@ window.addEventListener("DOMContentLoaded", function() {
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports) {
-
-var requestHelper = {
-
-  getRequest: function(url, callback, token, key) {
-  var xhr = new XMLHttpRequest()
-  xhr.open('GET', url)
-  if (token && key !== null) {
-    xhr.setRequestHeader(token, key)
-  }
-
-  xhr.addEventListener('load', function() {
-    var jsonString = xhr.responseText
-    var data = JSON.parse(jsonString)
-    console.log(data);
-    callback(data)
-  })
-  xhr.send()
-},
-
-}
-
-module.exports = requestHelper
-
-
-/***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
@@ -183,7 +183,7 @@ module.exports = MapWrapper;
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var requestHelper = __webpack_require__(1);
+var requestHelper = __webpack_require__(0);
 var apitoken = 'X-Auth-Token';
 var apikey = '16bf6721521f4342aca8f7c7656dff95';
 
