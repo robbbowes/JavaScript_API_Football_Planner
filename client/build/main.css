@@ -10,6 +10,7 @@ header {
 #main-div {
   position: absolute;
   text-align: center;
+  align-items: center;
   background-color: salmon;
   left: 50%;
   right: 50%;
@@ -25,15 +26,22 @@ header {
   background-color: dodgerblue;
 }
 
-/*#main-map {
+#main-map {
   height: 400px;
-  width: 500px
-  }*/
+  width: 500px;
+  margin-top: 260px;
+}
 
 #premier-league-logo {
   max-width: 400px;
   padding-top: 30px;
   padding-left: 10px;
+}
+
+ul {
+    width: 50%;
+    margin: auto;
+    text-align: center;
 }
 
 #team-dropdown-div {
@@ -57,7 +65,21 @@ header {
 
 #away-fixtures-list {
   margin-top: 260px;
-    list-style: none;
+  list-style: none;
+}
+
+#fixture-div {
+  padding: 7px;
+  background-color: green;
+  margin: 10px;
+  height: 400px;
+  width: 400px;
+  text-align: center;
+}
+
+#home-team-name {
+  padding: 0;
+  margin: 0;
 }
 
 #league-table {
@@ -66,7 +88,7 @@ header {
 }
 
 .crest {
-  max-width: 150px;
+  max-height: 200px;
 }
 
 .highlighted {

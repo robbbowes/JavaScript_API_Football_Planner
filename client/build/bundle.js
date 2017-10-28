@@ -79,7 +79,6 @@ var requestHelper = {
   xhr.addEventListener('load', function() {
     var jsonString = xhr.responseText
     var data = JSON.parse(jsonString)
-    console.log(data);
     callback(data)
   })
   xhr.send()
@@ -100,21 +99,12 @@ var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
 var MapWrapper = __webpack_require__(2)
 var getLeagueTable = __webpack_require__(3);
-var renderMapDirections = __webpack_require__(4)
-
-// var DirectionsService = new google.maps.DirectionsService;
-// console.log(DirectionsService);
-
-
-var displayFixture = function(fixture) {
-  console.log("hello world!");
-  renderMapDirections();
-}
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
-    var fixture = directionsButton.value;
-    displayFixture(fixture);
+    var select = document.getElementById("team-dropdown");
+    var team = JSON.parse(select.value);
+    initMap(team);
   });
 }
 
@@ -127,12 +117,16 @@ var getTeamCrest = function(crestImg, fixture) {
 
 
 var populateFixturesList = function(team, upcomingFixtures) {
-  var ul = document.querySelector("#away-fixtures-list");
-  while (ul.firstChild) { ul.removeChild(ul.firstChild) }
+  var mainDiv = document.getElementById("main-div");
+  while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
+  var ul = document.createElement("ul");
+  ul.id = "away-fixtures-list";
   upcomingFixtures.forEach(function(fixture) {
     var li = document.createElement("li");
     var fixtureDiv = document.createElement("div");
+    fixtureDiv.id = "fixture-div";
     var homeTeamName = document.createElement("h5");
+    homeTeamName.id = "home-team-name";
     homeTeamName.innerText = fixture.homeTeamName + " (AWAY)";
     var homeTeamCrest = document.createElement("img");
     homeTeamCrest.classList += "crest";
@@ -141,8 +135,9 @@ var populateFixturesList = function(team, upcomingFixtures) {
     date.innerText = fixture.date;
     var directionsButton = document.createElement("button");
     directionsButton.id = "directions-button";
-    directionsButton.innerText = "Get directions";
+    directionsButton.innerText = "Stadium Location";
     directionsButton.value = fixture;
+    mainDiv.appendChild(ul);
     ul.appendChild(li);
     li.appendChild(fixtureDiv);
     fixtureDiv.appendChild(homeTeamName);
@@ -187,10 +182,10 @@ var populateDropdown = function(information) {
   getSelectedTeamFixtures(teams);
 }
 
-var initMap = function() {
+var initMap = function(team) {
   var mainMap = new MapWrapper()
+  console.log(team);
 }
-
 
 window.addEventListener("DOMContentLoaded", function() {
   requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey);
@@ -202,8 +197,12 @@ window.addEventListener("DOMContentLoaded", function() {
 /***/ (function(module, exports) {
 
 var MapWrapper = function() {
-  var container = document.getElementById('main-map');
-  this.googleMap = new google.maps.Map( container, {
+  var container = document.getElementById('main-div');
+  while (container.firstChild) { container.removeChild(container.firstChild) }
+  var mapDiv = document.createElement("div");
+  mapDiv.id = "main-map";
+  container.appendChild(mapDiv);
+  this.googleMap = new google.maps.Map( mapDiv, {
     center: {lat: 53.4808, lng: 2.2426},
     zoom: 6
   })
@@ -268,8 +267,6 @@ var populateLeagueTable = function(leagueTable) {
     tr.appendChild(teamPlayed);
     tr.appendChild(teamGD);
     tr.appendChild(teamPoints);
-    console.log(selectedTeamName);
-    console.log(team.name);
     if (selectedTeamName === team.teamName) {tr.classList += "highlighted"}
   })
 }
@@ -280,18 +277,6 @@ var getLeagueTable = function() {
 }
 
 module.exports = getLeagueTable
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-var renderMapDirections = function(map) {
-  var directionsService = new google.maps.DirectionsRenderer();
-  console.log(directionsService);
-}
-
-module.exports = renderMapDirections;
 
 
 /***/ })

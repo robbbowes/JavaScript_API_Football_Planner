@@ -4,21 +4,12 @@ var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
 var MapWrapper = require('./views/map_wrapper.js')
 var getLeagueTable = require("./views/table_view.js");
-var renderMapDirections = require("./views/directions.js")
-
-// var DirectionsService = new google.maps.DirectionsService;
-// console.log(DirectionsService);
-
-
-var displayFixture = function(fixture) {
-  console.log("hello world!");
-  renderMapDirections();
-}
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
-    var fixture = directionsButton.value;
-    displayFixture(fixture);
+    var select = document.getElementById("team-dropdown");
+    var team = JSON.parse(select.value);
+    initMap(team);
   });
 }
 
@@ -31,12 +22,16 @@ var getTeamCrest = function(crestImg, fixture) {
 
 
 var populateFixturesList = function(team, upcomingFixtures) {
-  var ul = document.querySelector("#away-fixtures-list");
-  while (ul.firstChild) { ul.removeChild(ul.firstChild) }
+  var mainDiv = document.getElementById("main-div");
+  while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
+  var ul = document.createElement("ul");
+  ul.id = "away-fixtures-list";
   upcomingFixtures.forEach(function(fixture) {
     var li = document.createElement("li");
     var fixtureDiv = document.createElement("div");
+    fixtureDiv.id = "fixture-div";
     var homeTeamName = document.createElement("h5");
+    homeTeamName.id = "home-team-name";
     homeTeamName.innerText = fixture.homeTeamName + " (AWAY)";
     var homeTeamCrest = document.createElement("img");
     homeTeamCrest.classList += "crest";
@@ -45,8 +40,9 @@ var populateFixturesList = function(team, upcomingFixtures) {
     date.innerText = fixture.date;
     var directionsButton = document.createElement("button");
     directionsButton.id = "directions-button";
-    directionsButton.innerText = "Get directions";
+    directionsButton.innerText = "Stadium Location";
     directionsButton.value = fixture;
+    mainDiv.appendChild(ul);
     ul.appendChild(li);
     li.appendChild(fixtureDiv);
     fixtureDiv.appendChild(homeTeamName);
@@ -91,10 +87,10 @@ var populateDropdown = function(information) {
   getSelectedTeamFixtures(teams);
 }
 
-var initMap = function() {
+var initMap = function(team) {
   var mainMap = new MapWrapper()
+  console.log(team);
 }
-
 
 window.addEventListener("DOMContentLoaded", function() {
   requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey);

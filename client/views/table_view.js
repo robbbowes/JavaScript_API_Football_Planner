@@ -50,8 +50,6 @@ var populateLeagueTable = function(leagueTable) {
     tr.appendChild(teamPlayed);
     tr.appendChild(teamGD);
     tr.appendChild(teamPoints);
-    console.log(selectedTeamName);
-    console.log(team.name);
     if (selectedTeamName === team.teamName) {tr.classList += "highlighted"}
   })
 }
