@@ -5,6 +5,10 @@ var apikey = '16bf6721521f4342aca8f7c7656dff95'
 var MapWrapper = require('./views/map_wrapper.js')
 var getLeagueTable = require("./views/table_view.js");
 
+// var DirectionsService = new google.maps.DirectionsService;
+// console.log(DirectionsService);
+
+
 var displayFixture = function(fixture) {
   console.log("hello world!");
 }
@@ -88,6 +92,7 @@ var populateDropdown = function(information) {
 var initMap = function() {
   var mainMap = new MapWrapper()
 }
+
 
 window.addEventListener("DOMContentLoaded", function() {
   requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey);
