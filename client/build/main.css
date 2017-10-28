@@ -1,8 +1,58 @@
+header {
+  background-color: dodgerblue;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index:1000;
+}
+
+#main-div {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  width: 50%;
+  margin-left: -25%;
+}
+
 #main-map {
   height: 400px;
   width: 500px
   }
 
-.crest {
-  max-width: 100px;
+#premier-league-logo {
+  max-width: 400px;
+  padding-top: 30px;
+  padding-left: 10px;
 }
+
+#team-dropdown-div {
+  background-color: dodgerblue;
+  padding-bottom: 7px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin-top: 200px;
+  z-index:1000;
+}
+
+#team-dropdown {
+  display: block;
+  margin: 0 auto;
+  height: 40px;
+  width: 200px;
+  font-size: 20px;
+}
+
+#fixtures-list {
+  margin-top: 260px;
+}
+
+.crest {
+  max-width: 150px;
+}
+/*
+.hidden {
+  display: none;
+}*/
