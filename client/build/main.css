@@ -45,12 +45,16 @@ header {
   font-size: 20px;
 }
 
-#fixtures-list {
+#away-fixtures-list {
   margin-top: 260px;
 }
 
 .crest {
   max-width: 150px;
+}
+
+.highlighted {
+  background-color: dodgerblue;
 }
 /*
 .hidden {

@@ -100,6 +100,7 @@ var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
 var MapWrapper = __webpack_require__(2)
 var getLeagueTable = __webpack_require__(3);
+var renderMapDirections = __webpack_require__(4)
 
 // var DirectionsService = new google.maps.DirectionsService;
 // console.log(DirectionsService);
@@ -107,6 +108,7 @@ var getLeagueTable = __webpack_require__(3);
 
 var displayFixture = function(fixture) {
   console.log("hello world!");
+  renderMapDirections();
 }
 
 var initialiseDirectionsButton = function(directionsButton) {
@@ -123,9 +125,9 @@ var getTeamCrest = function(crestImg, fixture) {
   }, apitoken, apikey)
 }
 
+
 var populateFixturesList = function(team, upcomingFixtures) {
   var ul = document.querySelector("#away-fixtures-list");
-  ul.id = "fixtures-list";
   while (ul.firstChild) { ul.removeChild(ul.firstChild) }
   upcomingFixtures.forEach(function(fixture) {
     var li = document.createElement("li");
@@ -220,7 +222,12 @@ var apikey = '16bf6721521f4342aca8f7c7656dff95';
 
 
 var populateLeagueTable = function(leagueTable) {
+  var select = document.getElementById("team-dropdown");
+  var selectedTeam = JSON.parse(select.value);
+  var selectedTeamName = selectedTeam.name;
+
   var table = document.getElementById("league-table");
+  while (table.firstChild) { table.removeChild(table.firstChild) }
   var thead = document.createElement("thead");
   var theadRow = document.createElement("tr");
   var hRank = document.createElement("tr");
@@ -261,6 +268,9 @@ var populateLeagueTable = function(leagueTable) {
     tr.appendChild(teamPlayed);
     tr.appendChild(teamGD);
     tr.appendChild(teamPoints);
+    console.log(selectedTeamName);
+    console.log(team.name);
+    if (selectedTeamName === team.teamName) {tr.classList += "highlighted"}
   })
 }
 
@@ -270,6 +280,18 @@ var getLeagueTable = function() {
 }
 
 module.exports = getLeagueTable
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+var renderMapDirections = function(map) {
+  var directionsService = new google.maps.DirectionsRenderer();
+  console.log(directionsService);
+}
+
+module.exports = renderMapDirections;
 
 
 /***/ })

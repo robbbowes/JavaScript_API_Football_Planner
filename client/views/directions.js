@@ -1,3 +1,6 @@
 var renderMapDirections = function(map) {
-  var DirectionsService = new google.maps.DirectionsService;  
+  var directionsService = new google.maps.DirectionsRenderer();
+  console.log(directionsService);
 }
+
+module.exports = renderMapDirections;

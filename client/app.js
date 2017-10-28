@@ -4,6 +4,7 @@ var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
 var MapWrapper = require('./views/map_wrapper.js')
 var getLeagueTable = require("./views/table_view.js");
+var renderMapDirections = require("./views/directions.js")
 
 // var DirectionsService = new google.maps.DirectionsService;
 // console.log(DirectionsService);
@@ -11,6 +12,7 @@ var getLeagueTable = require("./views/table_view.js");
 
 var displayFixture = function(fixture) {
   console.log("hello world!");
+  renderMapDirections();
 }
 
 var initialiseDirectionsButton = function(directionsButton) {
@@ -27,9 +29,9 @@ var getTeamCrest = function(crestImg, fixture) {
   }, apitoken, apikey)
 }
 
+
 var populateFixturesList = function(team, upcomingFixtures) {
   var ul = document.querySelector("#away-fixtures-list");
-  ul.id = "fixtures-list";
   while (ul.firstChild) { ul.removeChild(ul.firstChild) }
   upcomingFixtures.forEach(function(fixture) {
     var li = document.createElement("li");

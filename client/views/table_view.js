@@ -4,7 +4,12 @@ var apikey = '16bf6721521f4342aca8f7c7656dff95';
 
 
 var populateLeagueTable = function(leagueTable) {
+  var select = document.getElementById("team-dropdown");
+  var selectedTeam = JSON.parse(select.value);
+  var selectedTeamName = selectedTeam.name;
+
   var table = document.getElementById("league-table");
+  while (table.firstChild) { table.removeChild(table.firstChild) }
   var thead = document.createElement("thead");
   var theadRow = document.createElement("tr");
   var hRank = document.createElement("tr");
@@ -45,6 +50,9 @@ var populateLeagueTable = function(leagueTable) {
     tr.appendChild(teamPlayed);
     tr.appendChild(teamGD);
     tr.appendChild(teamPoints);
+    console.log(selectedTeamName);
+    console.log(team.name);
+    if (selectedTeamName === team.teamName) {tr.classList += "highlighted"}
   })
 }
 
