@@ -13,29 +13,25 @@ var initialiseDirectionsButton = function(directionsButton) {
     var currentPosition;
     navigator.geolocation.getCurrentPosition(function(result) {
       currentPosition = {lat: result.coords.latitude, lng: result.coords.longitude}
-      console.log(currentPosition);
+      var homeTeamName = directionsButton.value;
+      requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
+        var foundTeam = dbTeams.find(function(dbTeam) {
+          return homeTeamName === dbTeam.name;
+        });
+        var coordinates;
+        navigator.geolocation.getCurrentPosition(function(result) {
+          coordinates = result;
+        });
+        var endLat = foundTeam.latLng[0];
+        var endLng = foundTeam.latLng[1];
+        var end = {
+          lat: endLat,
+          lng: endLng
+        }
+        var mode = "DRIVING"
+        mapWrapper.getDirections(currentPosition, end, mode);
+      });
     });
-
-    // var homeTeamName = directionsButton.value;
-    // requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
-    //   var foundTeam = dbTeams.find(function(dbTeam) {
-    //     return homeTeamName === dbTeam.name;
-    //   });
-    //   var coordinates;
-    //   navigator.geolocation.getCurrentPosition(function(result) {
-    //     coordinates = result;
-    //   });
-    //   var endLat = foundTeam.latLng[0];
-    //   var endLng = foundTeam.latLng[1];
-    //   var end = {
-    //     lat: endLat,
-    //     lng: endLng
-    //   }
-    //   var mode = "DRIVING"
-    //   // mapWrapper.getDirections(start, end, mode);
-    //   // var mainMap = new MapWrapper(lat, end, mode);
-    // });
-    mapWrapper.geolocate();
   });
 }
 
