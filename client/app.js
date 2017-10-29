@@ -46,6 +46,7 @@ var getTeamCrest = function(crestImg, fixture) {
 var populatePreviousFixturesList = function(team, previousFixtures) {
   var statsDiv = document.getElementById("stats-div");
   while (statsDiv.firstChild) { statsDiv.removeChild(statsDiv.firstChild) }
+  statsDiv.style.backgroundColor = "wheat"
   var ul = document.createElement("ul");
   ul.id = "previous-fixtures-list";
   statsDiv.appendChild(ul);
@@ -70,6 +71,10 @@ var populateFixturesList = function(team, upcomingFixtures) {
   var mainDiv = document.getElementById("main-div");
   while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
   var ul = document.createElement("ul");
+  var awayFixturesHeader = document.createElement("h2")
+  awayFixturesHeader.id = "away-fixtures-header"
+  awayFixturesHeader.innerText = "Upcoming Away Fixtures:"
+  mainDiv.appendChild(awayFixturesHeader)
   ul.id = "away-fixtures-list";
   upcomingFixtures.forEach(function(fixture) {
     var li = document.createElement("li");
@@ -122,7 +127,7 @@ var setBackground = function (team) {
     case "Huddersfield Town": mainDiv.className = "Huddersfield"; break;
     case "Brighton & Hove Albion": mainDiv.className = 'Brighton'; break;
     case "Stoke City FC": mainDiv.className = "Stoke"; break;
-    case "West Bromwich Albion FC": mainDiv.className = "WBA"; break;
+    case "West Bromwich Albion FC": mainDiv.className += "WBA"; break;
     case "Leicester City FC": mainDiv.className = "Leicester"; break;
     case "Crystal Palace FC": mainDiv.className = "Palace"; break;
     case "Swansea City FC": mainDiv.className = "Swansea"; break;

@@ -9,6 +9,8 @@ var populateLeagueTable = function(leagueTable) {
   var selectedTeamName = selectedTeam.name;
 
   var table = document.getElementById("league-table");
+  var tableDiv = document.getElementById("table-div")
+  tableDiv.style.backgroundColor = 'wheat'
   while (table.firstChild) { table.removeChild(table.firstChild) }
   var thead = document.createElement("thead");
   var theadRow = document.createElement("tr");
