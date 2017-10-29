@@ -9,7 +9,7 @@ var dateTimeConverter = require("./helpers/date_time_converter.js");
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
-    var mapWrapper = new MapWrapper(40.30211, 43.23141, 10);
+    var mapWrapper = new MapWrapper(52.3916428, -2.0951209, 15);
     var currentPosition;
     navigator.geolocation.getCurrentPosition(function(result) {
       currentPosition = {lat: result.coords.latitude, lng: result.coords.longitude}
