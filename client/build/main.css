@@ -45,32 +45,38 @@ header {
 
 
 #container {
+  min-height: 100vh;
+  align-items: stretch;
   margin-top: 250px;
   display: flex;
   justify-content: center;
   flex-direction: row;
+  flex-wrap: wrap;
   margin-right: 0px;
   margin-left: 0px;
 }
 
 #table-div {
+  overflow: visible;
   order: 1;
   flex-grow: 1;
+  min-width: 480px;
+  max-width: 480px;
   background-color: wheat;
 }
 
 #main-div {
+  flex-shrink: 0;
   order: 2;
   flex-grow: 1;
   text-align: center;
-  background-color: salmon;
-  /*left: 50%;
-  right: 50%;
-  width: 50%;
-  margin-left: -25%;*/
 }
 
+
 #stats-div {
+  min-width: 480px;
+  max-width: 480px;
+  flex-shrink: 0;
   flex-grow: 1;
   order: 3;
   background-color: dodgerblue;
@@ -90,10 +96,18 @@ header {
 }
 
 #main-map {
-  height: 400px;
-  width: 500px;
-  margin-top: 260px;
+  height: 500px;
+  width: 700px;
+  left: 50%;
+  right: 50%;
+  margin-left: -35%;
+  margin-top: 100px;
+  padding: 0;
+  position: fixed;
+
 }
+
+
 
 
 
@@ -139,19 +153,9 @@ header {
 .hidden {
   display: none;
 }*/
-
+/*
 #test-map-div {
   height: 600px;
   width: 700px;
   margin-top: 300px;
-}
-
-.Newcastle {
-  background: repeating-linear-gradient(
-    90deg,
-    black,
-    black 80px,
-    white 80px,
-    white 160px
-    );
-}
+}*/

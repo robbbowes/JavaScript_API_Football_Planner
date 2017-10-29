@@ -93,11 +93,12 @@ module.exports = requestHelper
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var requestHelper = __webpack_require__(0)
-var teamsUrl = 'http://api.football-data.org/v1/competitions/445/teams'
-var apitoken = 'X-Auth-Token'
-var apikey = '16bf6721521f4342aca8f7c7656dff95'
-var MapWrapper = __webpack_require__(2)
+var requestHelper = __webpack_require__(0);
+var teamsUrl = 'http://api.football-data.org/v1/competitions/445/teams';
+var apitoken = 'X-Auth-Token';
+var ApiIterator = __webpack_require__(5);
+var apiIterator = new ApiIterator();
+var MapWrapper = __webpack_require__(2);
 var getLeagueTable = __webpack_require__(3);
 var dateTimeConverter = __webpack_require__(4);
 
@@ -110,6 +111,7 @@ var initialiseDirectionsButton = function(directionsButton) {
 
 var getTeamCrest = function(crestImg, fixture) {
   var url = fixture._links.homeTeam.href;
+  var apikey = apiIterator.getKey();
   requestHelper.getRequest(url, function(team) {
     crestImg.src = team.crestUrl;
   }, apitoken, apikey)
@@ -189,14 +191,35 @@ var setClubLogo = function(team) {
 
 var setBackground = function (team) {
   var mainDiv = document.getElementById("main-div");
-  if(team.name === "Newcastle United FC") {
-    mainDiv.className = "Newcastle"
+  switch(team.name) {
+    case "Newcastle United FC": mainDiv.className = "Newcastle"; break;
+    case "Manchester City FC": mainDiv.className = "ManCity"; break;
+    case "Manchester United FC": mainDiv.className = "ManUtd"; break;
+    case "Tottenham Hotspur": mainDiv.className = "Tottenham"; break;
+    case "Chelsea FC": mainDiv.className = "Chelsea"; break;
+    case "Arsenal FC": mainDiv.className = "Arsenal"; break;
+    case "Liverpool FC": mainDiv.className = "Liverpool"; break;
+    case "Watford FC": mainDiv.className = "Watford"; break;
+    case "Burnley FC": mainDiv.className = "Burnley"; break;
+    case "Southampton FC": mainDiv.className = "Southampton"; break;
+    case "Huddersfield Town": mainDiv.className = "Huddersfield"; break;
+    case "Brighton & Hove Albion": mainDiv.className = 'Brighton'; break;
+    case "Stoke City FC": mainDiv.className = "Stoke"; break;
+    case "West Bromwich Albion FC": mainDiv.className = "WBA"; break;
+    case "Leicester City FC": mainDiv.className = "Leicester"; break;
+    case "Crystal Palace FC": mainDiv.className = "Palace"; break;
+    case "Swansea City FC": mainDiv.className = "Swansea"; break;
+    case "Everton FC": mainDiv.className = "Everton"; break;
+    case "AFC Bournemouth": mainDiv.className = "Bournemouth"; break;
+    case "West Ham United FC": mainDiv.className = "WHAM"; break;
+    default: mainDiv.className = "Swansea";
   }
 }
 
 var getSelectedTeamFixtures = function(teams) {
   var select = document.querySelector("#team-dropdown");
   select.addEventListener("change", function() {
+    var apikey = apiIterator.getKey();
     var team = JSON.parse(select.value);
     var fixturesUrl = team._links.fixtures.href;
     requestHelper.getRequest(fixturesUrl, function(info) {
@@ -247,6 +270,7 @@ var initMap = function(teamName) {
 }
 
 window.addEventListener("DOMContentLoaded", function() {
+  var apikey = apiIterator.getKey();
   requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey);
   // var directionsService = new google.maps.DirectionsService();
   // var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -321,11 +345,11 @@ window.addEventListener("DOMContentLoaded", function() {
 /***/ (function(module, exports) {
 
 var MapWrapper = function(lat, lng, zoom) {
-  var container = document.getElementById('main-div');
-  while (container.firstChild) { container.removeChild(container.firstChild) }
+  var mainDiv = document.getElementById('main-div');
+  while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
   var mapDiv = document.createElement("div");
   mapDiv.id = "main-map";
-  container.appendChild(mapDiv);
+  mainDiv.appendChild(mapDiv);
   this.googleMap = new google.maps.Map( mapDiv, {
     center: {lat: lat, lng: lng},
     zoom: zoom
@@ -453,6 +477,27 @@ var dateTimeConverter = function(string) {
 }
 
 module.exports = dateTimeConverter;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+var ApiIterator = function() {
+  this.apiKeys = ["3d6c8c6d3b7842f2b6b4b6c1575ecdb4",
+                 "16bf6721521f4342aca8f7c7656dff95",
+                 "3a097a6f21e3466ea51f1c49cf3e657c",
+                 "cf32777623b9432c8b8c34072e44a1fd"]
+  this.index = 0
+}
+
+ApiIterator.prototype.getKey = function() {
+  if ((this.index + 1) < this.apiKeys.length - 1) { this.index ++ }
+  if ((this.index + 1) > this.apiKeys.length - 1) { this.index = 0 }
+  return this.apiKeys[0];
+}
+
+module.exports = ApiIterator;
 
 
 /***/ })
