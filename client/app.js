@@ -7,6 +7,38 @@ var MapWrapper = require('./views/map_wrapper.js');
 var getLeagueTable = require("./views/table_view.js");
 var dateTimeConverter = require("./helpers/date_time_converter.js");
 
+var initDirections = function() {
+  var directionsDisplay;
+  var directionsService = new google.maps.DirectionsService();
+
+  function initialize() {
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    var map = document.getElementById("map");
+    directionsDisplay.setMap(map);
+    console.log(map);
+    calcRoute();
+  }
+
+  function calcRoute() {
+    var start = new google.maps.LatLng(53.850033, -0.6500523);
+    var end = new google.maps.LatLng(51.5025, -0.1348);
+    var request = {
+      origin: start,
+      destination: end,
+      travelMode: 'DRIVING'
+    };
+    directionsService.route(request, function(result, status) {
+      console.log("routing!");
+      console.log(result);
+      console.log(directionsDisplay);
+      directionsDisplay.setDirections(result);
+    });
+  }
+
+  initialize();
+
+}
+
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
     var homeTeamName = directionsButton.value;
@@ -164,7 +196,6 @@ var populateDropdown = function(information) {
 
 var initMap = function(teamName) {
   requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
-    console.log(teamName);
     var foundTeam = dbTeams.find(function(dbTeam) {
       return teamName === dbTeam.name;
     });
@@ -209,7 +240,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
 //////////////////////////////////////////////////
 //
-//   var directionsDisplay;
+// var directionsDisplay;
 // var directionsService = new google.maps.DirectionsService();
 // var map;
 //
