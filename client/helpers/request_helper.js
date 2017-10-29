@@ -10,7 +10,7 @@ var requestHelper = {
   xhr.addEventListener('load', function() {
     var jsonString = xhr.responseText
     var data = JSON.parse(jsonString)
-    console.log(data);
+    callback(data)
   })
   xhr.send()
 },
