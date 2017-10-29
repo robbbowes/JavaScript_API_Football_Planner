@@ -97,9 +97,9 @@ var requestHelper = __webpack_require__(0)
 var teamsUrl = 'http://api.football-data.org/v1/competitions/445/teams'
 var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
-var MapWrapper = __webpack_require__(2)
-var getLeagueTable = __webpack_require__(3);
-var dateTimeConverter = __webpack_require__(4);
+var MapWrapper = __webpack_require__(3)
+var getLeagueTable = __webpack_require__(4);
+var dateTimeConverter = __webpack_require__(5);
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
@@ -285,7 +285,8 @@ window.addEventListener("DOMContentLoaded", function() {
 
 
 /***/ }),
-/* 2 */
+/* 2 */,
+/* 3 */
 /***/ (function(module, exports) {
 
 var MapWrapper = function(lat, lng, zoom) {
@@ -304,7 +305,7 @@ module.exports = MapWrapper;
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var requestHelper = __webpack_require__(0);
@@ -372,7 +373,7 @@ module.exports = getLeagueTable
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 var dateTimeConverter = function(string) {
