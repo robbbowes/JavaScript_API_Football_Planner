@@ -43,13 +43,11 @@ header {
   font-size: 20px;
 }
 
-
 #container {
   min-height: 100vh;
   align-items: stretch;
   margin-top: 250px;
   display: flex;
-  justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
   margin-right: 0px;
@@ -60,8 +58,6 @@ header {
   overflow: visible;
   order: 1;
   flex-grow: 1;
-  /*min-width: 480px;
-  max-width: 480px;*/
   background-color: wheat;
 }
 
@@ -72,10 +68,7 @@ header {
   text-align: center;
 }
 
-
 #stats-div {
-  /*min-width: 480px;
-  max-width: 480px;*/
   flex-shrink: 0;
   flex-grow: 1;
   order: 3;
@@ -100,16 +93,11 @@ header {
   width: 700px;
   left: 50%;
   right: 50%;
-  margin-left: -35%;
+  /*margin-left: -35%;*/
   margin-top: 100px;
   padding: 0;
   position: fixed;
-
 }
-
-
-
-
 
 #away-fixtures-list {
   font-family: Palatino;
@@ -125,8 +113,6 @@ header {
   padding: 7px;
   background-color: green;
   margin: 10px;
-  /*height: 400px;
-  width: 400px;*/
   text-align: center;
 }
 
@@ -150,13 +136,65 @@ header {
 .highlighted {
   background-color: dodgerblue;
 }
-/*
-.hidden {
-  display: none;
-}*/
-/*
-#test-map-div {
-  height: 600px;
-  width: 700px;
-  margin-top: 300px;
-}*/
+
+@media (min-width: 1000px) and (max-width: 1400px) {
+
+  header {
+    max-height: 200px;
+  }
+
+  #premier-league-logo {
+    max-width: 200px;
+    max-height: 100px;
+    padding-top: 15px;
+    padding-left: 5px;
+  }
+
+  #club-logo {
+    height: 100px;
+    padding-top: 5px;
+    padding-right: 20px;
+  }
+
+  #team-dropdown-div {
+    margin-top: 105px;
+  }
+
+  #table-div {
+    max-width: 300px;
+    height: 600px;
+  }
+
+  #stats-div {
+    max-width: 300px;
+  }
+
+  #previous-fixtures-list {
+    position: relative;
+    font-size: 18px;
+    max-width: 290px;
+  }
+
+  #container {
+    margin-top: 140px;
+  }
+
+  #league-table {
+    font-size: 10px;
+    max-width: 290px;
+    position: relative;
+    margin-top: 20px;
+  }
+
+  #main-map {
+    height: 200px;
+    width: 300px;
+    margin: 0;
+  }
+
+  #team-dropdown {
+    height: 30px;
+    width: 250px;
+    font-size: 15px;
+  }
+}
