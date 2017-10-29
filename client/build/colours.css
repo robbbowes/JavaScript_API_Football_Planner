@@ -1,0 +1,170 @@
+.Newcastle {
+  background: repeating-linear-gradient(
+    90deg,
+    black,
+    black 80px,
+    white 80px,
+    white 160px
+    );
+}
+
+.ManCity {
+  background: #92C0E5;
+}
+
+
+.ManUtd {
+  background: #ED131F;
+}
+
+.Tottenham {
+  background: #FFFFFF;
+}
+
+.Chelsea {
+  background: #004390;
+}
+
+.Arsenal {
+  background: #E6071B;
+}
+
+.Liverpool {
+  background: #DA052E;
+}
+
+.Watford {
+  background: repeating-linear-gradient(
+    90deg,
+    #EDF102,
+    #EDF102 80px,
+    #F82331 80px,
+    #F82331 160px
+    );
+}
+
+.Burnley {
+  background: repeating-linear-gradient(
+    90deg,
+    #7F1734,
+    #7F1734 80px,
+    #79B9D7 80px,
+    #79B9D7 160px
+    );
+}
+
+.Southampton {
+  background: repeating-linear-gradient(
+    90deg,
+    #FFFFFF,
+    #FFFFFF 80px,
+    #ED131F 80px,
+    #ED131F 160px
+    );
+}
+
+.Huddersfield {
+  background: repeating-linear-gradient(
+    90deg,
+    #FFFFFF,
+    #FFFFFF 80px,
+    #006CB2 80px,
+    #006CB2 160px
+    );
+}
+
+.Brighton {
+  background: repeating-linear-gradient(
+    90deg,
+    #FFFFFF,
+    #FFFFFF 80px,
+    #0059A7 80px,
+    #0059A7 160px
+    );
+}
+
+.Stoke {
+  background: repeating-linear-gradient(
+    90deg,
+    #FFFFFF,
+    #FFFFFF 80px,
+    #EB3A43 80px,
+    #EB3A43 160px
+    );
+}
+
+.WBA {
+  background: repeating-linear-gradient(
+    90deg,
+    #FFFFFF,
+    #FFFFFF 80px,
+    #000080 80px,
+    #000080 160px
+    );
+}
+
+.Leicester {
+  background: #003D8A;
+}
+
+.Palace {
+  background: repeating-linear-gradient(
+    90deg,
+    #00448C,
+    #00448C 80px,
+    #B53D41 80px,
+    #B53D41 160px
+    );
+}
+
+.Swansea {
+  background: #FFFFFF;
+}
+
+.Everton {
+  background: #4169E1;
+}
+
+.Bournemouth {
+  background: repeating-linear-gradient(
+    90deg,
+    #000000,
+    #000000 80px,
+    #D41822 80px,
+    #D41822 160px
+    );
+}
+
+.WHAM {
+  background: repeating-linear-gradient(
+    90deg,
+    #7F1734,
+    #7F1734 80px,
+    #79B9D7 80px,
+    #79B9D7 160px
+    );
+}
+
+
+
+/*"Newcastle"; break;
+  case "Manchester City FC": mainDiv.className = "ManCity"; break;
+  case "Manchester United FC": mainDiv.className = "ManUtd"; break;
+  case "Tottenham Hotspur": mainDiv.className = "Tottenham"; break;
+  case "Chelsea FC": mainDiv.className = "Chelsea"; break;
+  case "Arsenal FC": mainDiv.className = "Arsenal"; break;
+  case "Liverpool FC": mainDiv.className = "Liverpool"; break;
+  case "Watford FC": mainDiv.className = "Watford"; break;
+  case "Burnley FC": mainDiv.className = "Burnley"; break;
+  case "Southampton FC": mainDiv.className = "Southampton"; break;
+  case "Huddersfield Town": mainDiv.className = "Huddersfield"; break;
+  case "Brighton & Hove Albion": mainDiv.className = 'Brighton'; break;
+  case "Stoke City FC": mainDiv.className = "Stoke"; break;
+  case "West Bromwich Albion FC": mainDiv.className = "WBA"; break;
+  case "Leicester City FC": mainDiv.className = "Leicester"; break;
+  case "Crystal Palace FC": mainDiv.className = "Palace"; break;
+  case "Swansea City FC": mainDiv.className = "Swansea"; break;
+  case "Everton FC": mainDiv.className = "Everton"; break;
+  case "AFC Bournemouth": mainDiv.className = "Bournemouth"; break;
+  case "West Ham United FC": mainDiv.className = "WHAM"; break;
+  default: mainDiv.className = "Swansea";*/
