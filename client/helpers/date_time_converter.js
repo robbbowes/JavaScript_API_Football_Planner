@@ -24,8 +24,12 @@ var dateTimeConverter = function(string) {
   if (day.substring(0, 1) === "0") { day = day.substring(1, 2)}
   switch (day) {
     case "1" : day = day.concat("st"); break;
+    case "21": day = day.concat("st"); break;
+    case "31": day = day.concat("st"); break;
     case "2" : day = day.concat("nd"); break;
+    case "22": day = day.concat("nd"); break;
     case "3" : day = day.concat("rd"); break;
+    case "23": day = day.concat("rd"); break;
     default  : day = day.concat("th");
   }
 

@@ -63,9 +63,8 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports) {
 
 var requestHelper = {
@@ -91,8 +90,7 @@ module.exports = requestHelper
 
 
 /***/ }),
-
-/***/ 1:
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var requestHelper = __webpack_require__(0)
@@ -101,7 +99,7 @@ var apitoken = 'X-Auth-Token'
 var apikey = '16bf6721521f4342aca8f7c7656dff95'
 var MapWrapper = __webpack_require__(2)
 var getLeagueTable = __webpack_require__(3);
-var dateTimeConverter = __webpack_require__(255);
+var dateTimeConverter = __webpack_require__(4);
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
@@ -123,11 +121,29 @@ var populatePreviousFixturesList = function(team, previousFixtures) {
   var ul = document.createElement("ul");
   ul.id = "previous-fixtures-list";
   statsDiv.appendChild(ul);
+
+  var li = document.createElement("li");
+  var h5 = document.createElement("h5");
+  h5.innerText = "PREVIOUS FIXTURES";
+  ul.appendChild(li);
+  li.appendChild(h5);
+
   previousFixtures.forEach(function(fixture) {
-    var li = document.createElement("li");
-    li.innerText = fixture.homeTeamName + "   " + fixture.result.goalsHomeTeam +
-      " - " + fixture.awayTeamName + "   " + fixture.result.goalsAwayTeam;
-    ul.appendChild(li);
+    var li1 = document.createElement("li");
+    var li2 = document.createElement("li");
+    // var liBreak = document.createElement("li");
+
+    // var br = document.createElement("br");
+    li1.innerText = fixture.homeTeamName + "   " + fixture.result.goalsHomeTeam
+    li2.innerText = fixture.awayTeamName + "   " + fixture.result.goalsAwayTeam;
+    li2.id = "previous-fixture";
+    // liBreak.innerText = " ";
+
+    // li.innerHTML = fixture.homeTeamName + "   " + fixture.result.goalsHomeTeam
+    // + br + fixture.awayTeamName + "   " + fixture.result.goalsAwayTeam;
+    ul.appendChild(li1);
+    ul.appendChild(li2);
+    // ul.appendChild(liBreak);
   })
 }
 
@@ -166,6 +182,18 @@ var populateFixturesList = function(team, upcomingFixtures) {
   });
 }
 
+var setClubLogo = function(team) {
+  var logo = document.getElementById("club-logo");
+  logo.src = team.crestUrl;
+}
+
+var setBackground = function (team) {
+  var mainDiv = document.getElementById("main-div");
+  if(team.name === "Newcastle United FC") {
+    mainDiv.className = "Newcastle"
+  }
+}
+
 var getSelectedTeamFixtures = function(teams) {
   var select = document.querySelector("#team-dropdown");
   select.addEventListener("change", function() {
@@ -181,6 +209,8 @@ var getSelectedTeamFixtures = function(teams) {
               && fixture.status !== "FINISHED";
       });
       populateFixturesList(team, upcomingFixtures);
+      setClubLogo(team);
+      setBackground(team);
     }, apitoken, apikey)
     getLeagueTable();
   })
@@ -287,8 +317,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
 
 /***/ }),
-
-/***/ 2:
+/* 2 */
 /***/ (function(module, exports) {
 
 var MapWrapper = function(lat, lng, zoom) {
@@ -307,57 +336,7 @@ module.exports = MapWrapper;
 
 
 /***/ }),
-
-/***/ 255:
-/***/ (function(module, exports) {
-
-var dateTimeConverter = function(string) {
-  //year
-  var year = string.substring(0, 4);
-
-  //month
-  var month;
-  switch (string.substring(5, 7)) {
-    case "01" : month = "January"; break;
-    case "02" : month = "February"; break;
-    case "03" : month = "March"; break;
-    case "04" : month = "April"; break;
-    case "05" : month = "May"; break;
-    case "06" : month = "June"; break;
-    case "07" : month = "July"; break;
-    case "08" : month = "August"; break;
-    case "09" : month = "September"; break;
-    case "10" : month = "October"; break;
-    case "11" : month = "November"; break;
-    case "12" : month = "December";
-  }
-
-  //day
-  var day = string.substring(8, 10);
-  if (day.substring(0, 1) === "0") { day = day.substring(1, 2)}
-  switch (day) {
-    case "1" : day = day.concat("st"); break;
-    case "2" : day = day.concat("nd"); break;
-    case "3" : day = day.concat("rd"); break;
-    default  : day = day.concat("th");
-  }
-
-  //date and time
-  var date = day + " " + month + " " + year;
-  var time = string.substring(11, 16);
-  var info = {
-    date: date,
-    time: time
-  }
-  return info;
-}
-
-module.exports = dateTimeConverter;
-
-
-/***/ }),
-
-/***/ 3:
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var requestHelper = __webpack_require__(0);
@@ -424,7 +403,58 @@ var getLeagueTable = function() {
 module.exports = getLeagueTable
 
 
-/***/ })
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
 
-/******/ });
+var dateTimeConverter = function(string) {
+  //year
+  var year = string.substring(0, 4);
+
+  //month
+  var month;
+  switch (string.substring(5, 7)) {
+    case "01" : month = "January"; break;
+    case "02" : month = "February"; break;
+    case "03" : month = "March"; break;
+    case "04" : month = "April"; break;
+    case "05" : month = "May"; break;
+    case "06" : month = "June"; break;
+    case "07" : month = "July"; break;
+    case "08" : month = "August"; break;
+    case "09" : month = "September"; break;
+    case "10" : month = "October"; break;
+    case "11" : month = "November"; break;
+    case "12" : month = "December";
+  }
+
+  //day
+  var day = string.substring(8, 10);
+  if (day.substring(0, 1) === "0") { day = day.substring(1, 2)}
+  switch (day) {
+    case "1" : day = day.concat("st"); break;
+    case "21": day = day.concat("st"); break;
+    case "31": day = day.concat("st"); break;
+    case "2" : day = day.concat("nd"); break;
+    case "22": day = day.concat("nd"); break;
+    case "3" : day = day.concat("rd"); break;
+    case "23": day = day.concat("rd"); break;
+    default  : day = day.concat("th");
+  }
+
+  //date and time
+  var date = day + " " + month + " " + year;
+  var time = string.substring(11, 16);
+  var info = {
+    date: date,
+    time: time
+  }
+  return info;
+}
+
+module.exports = dateTimeConverter;
+
+
+/***/ })
+/******/ ]);
 //# sourceMappingURL=bundle.js.map

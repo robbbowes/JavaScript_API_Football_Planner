@@ -26,11 +26,29 @@ var populatePreviousFixturesList = function(team, previousFixtures) {
   var ul = document.createElement("ul");
   ul.id = "previous-fixtures-list";
   statsDiv.appendChild(ul);
+
+  var li = document.createElement("li");
+  var h5 = document.createElement("h5");
+  h5.innerText = "PREVIOUS FIXTURES";
+  ul.appendChild(li);
+  li.appendChild(h5);
+
   previousFixtures.forEach(function(fixture) {
-    var li = document.createElement("li");
-    li.innerText = fixture.homeTeamName + "   " + fixture.result.goalsHomeTeam +
-      " - " + fixture.awayTeamName + "   " + fixture.result.goalsAwayTeam;
-    ul.appendChild(li);
+    var li1 = document.createElement("li");
+    var li2 = document.createElement("li");
+    // var liBreak = document.createElement("li");
+
+    // var br = document.createElement("br");
+    li1.innerText = fixture.homeTeamName + "   " + fixture.result.goalsHomeTeam
+    li2.innerText = fixture.awayTeamName + "   " + fixture.result.goalsAwayTeam;
+    li2.id = "previous-fixture";
+    // liBreak.innerText = " ";
+
+    // li.innerHTML = fixture.homeTeamName + "   " + fixture.result.goalsHomeTeam
+    // + br + fixture.awayTeamName + "   " + fixture.result.goalsAwayTeam;
+    ul.appendChild(li1);
+    ul.appendChild(li2);
+    // ul.appendChild(liBreak);
   })
 }
 
@@ -69,6 +87,18 @@ var populateFixturesList = function(team, upcomingFixtures) {
   });
 }
 
+var setClubLogo = function(team) {
+  var logo = document.getElementById("club-logo");
+  logo.src = team.crestUrl;
+}
+
+var setBackground = function (team) {
+  var mainDiv = document.getElementById("main-div");
+  if(team.name === "Newcastle United FC") {
+    mainDiv.className = "Newcastle"
+  }
+}
+
 var getSelectedTeamFixtures = function(teams) {
   var select = document.querySelector("#team-dropdown");
   select.addEventListener("change", function() {
@@ -84,6 +114,8 @@ var getSelectedTeamFixtures = function(teams) {
               && fixture.status !== "FINISHED";
       });
       populateFixturesList(team, upcomingFixtures);
+      setClubLogo(team);
+      setBackground(team);
     }, apitoken, apikey)
     getLeagueTable();
   })

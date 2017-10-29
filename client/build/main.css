@@ -7,37 +7,8 @@ header {
   z-index:1000;
 }
 
-#main-div {
-  position: absolute;
-  text-align: center;
-  align-items: center;
-  background-color: salmon;
-  left: 50%;
-  right: 50%;
-  width: 50%;
-  margin-left: -25%;
-}
-
-#table-div {
-  background-color: wheat;
-}
-
-#stats-div {
-  margin-top: 237px;
-  position: fixed;
-  margin-right: 0;
-  background-color: dodgerblue;
-  /*text-align: left;*/
-}
-
-/*#previous-fixtures-list {
-  padding: 0;
-}*/
-
-#main-map {
-  height: 400px;
-  width: 500px;
-  margin-top: 260px;
+* {
+  font-family: Palatino, "Palatino Linotype";
 }
 
 #premier-league-logo {
@@ -46,11 +17,12 @@ header {
   padding-left: 10px;
 }
 
-/*ul {
-    width: 50%;
-    margin: auto;
-    text-align: center;
-}*/
+#club-logo {
+  height: 165px;
+  padding-top: 30px;
+  padding-right: 60px;
+  float: right;
+}
 
 #team-dropdown-div {
   background-color: dodgerblue;
@@ -71,9 +43,67 @@ header {
   font-size: 20px;
 }
 
-#away-fixtures-list {
-  margin-top: 260px;
+
+#container {
+  margin-top: 250px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+#table-div {
+  order: 1;
+  flex-grow: 1;
+  background-color: wheat;
+}
+
+#main-div {
+  order: 2;
+  flex-grow: 1;
+  text-align: center;
+  background-color: salmon;
+  /*left: 50%;
+  right: 50%;
+  width: 50%;
+  margin-left: -25%;*/
+}
+
+#stats-div {
+  flex-grow: 1;
+  order: 3;
+  background-color: dodgerblue;
+  margin-right: 0px;
+}
+
+#previous-fixtures-list {
+  font-family: Palatino;
+  position: fixed;
   list-style: none;
+  font-size: 20px;
+  height: 750px;
+}
+
+#previous-fixture {
+  margin-bottom: 10px;
+}
+
+#main-map {
+  height: 400px;
+  width: 500px;
+  margin-top: 260px;
+}
+
+
+
+#away-fixtures-list {
+  font-family: Palatino;
+  list-style: none;
+  width: 50%;
+  margin-top: -40px;
+  margin: auto;
+  text-align: center;
 }
 
 #fixture-div {
@@ -91,12 +121,15 @@ header {
 }
 
 #league-table {
+  font-family: Palatino, "Palatino Linotype";
   position: fixed;
-  margin-top: 280px;
+  width: 480px;
+  height: 750px;
+  font-size: 20px;
 }
 
 .crest {
-  max-height: 200px;
+  height: 165px;
 }
 
 .highlighted {
@@ -111,4 +144,14 @@ header {
   height: 600px;
   width: 700px;
   margin-top: 300px;
+}
+
+.Newcastle {
+  background: repeating-linear-gradient(
+    90deg,
+    black,
+    black 80px,
+    white 80px,
+    white 160px
+    );
 }
