@@ -96,11 +96,11 @@ module.exports = requestHelper
 var requestHelper = __webpack_require__(0);
 var teamsUrl = 'http://api.football-data.org/v1/competitions/445/teams';
 var apitoken = 'X-Auth-Token';
-var ApiIterator = __webpack_require__(5);
+var ApiIterator = __webpack_require__(2);
 var apiIterator = new ApiIterator();
-var MapWrapper = __webpack_require__(2);
-var getLeagueTable = __webpack_require__(3);
-var dateTimeConverter = __webpack_require__(4);
+var MapWrapper = __webpack_require__(3);
+var getLeagueTable = __webpack_require__(4);
+var dateTimeConverter = __webpack_require__(5);
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
@@ -344,6 +344,27 @@ window.addEventListener("DOMContentLoaded", function() {
 /* 2 */
 /***/ (function(module, exports) {
 
+var ApiIterator = function() {
+  this.apiKeys = ["3d6c8c6d3b7842f2b6b4b6c1575ecdb4",
+                 "16bf6721521f4342aca8f7c7656dff95",
+                 "3a097a6f21e3466ea51f1c49cf3e657c",
+                 "cf32777623b9432c8b8c34072e44a1fd"]
+  this.index = 0
+}
+
+ApiIterator.prototype.getKey = function() {
+  if ((this.index + 1) < this.apiKeys.length - 1) { this.index ++ }
+  if ((this.index + 1) > this.apiKeys.length - 1) { this.index = 0 }
+  return this.apiKeys[0];
+}
+
+module.exports = ApiIterator;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
 var MapWrapper = function(lat, lng, zoom) {
   var mainDiv = document.getElementById('main-div');
   while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
@@ -360,7 +381,7 @@ module.exports = MapWrapper;
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var requestHelper = __webpack_require__(0);
@@ -428,7 +449,7 @@ module.exports = getLeagueTable
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 var dateTimeConverter = function(string) {
@@ -477,27 +498,6 @@ var dateTimeConverter = function(string) {
 }
 
 module.exports = dateTimeConverter;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-var ApiIterator = function() {
-  this.apiKeys = ["3d6c8c6d3b7842f2b6b4b6c1575ecdb4",
-                 "16bf6721521f4342aca8f7c7656dff95",
-                 "3a097a6f21e3466ea51f1c49cf3e657c",
-                 "cf32777623b9432c8b8c34072e44a1fd"]
-  this.index = 0
-}
-
-ApiIterator.prototype.getKey = function() {
-  if ((this.index + 1) < this.apiKeys.length - 1) { this.index ++ }
-  if ((this.index + 1) > this.apiKeys.length - 1) { this.index = 0 }
-  return this.apiKeys[0];
-}
-
-module.exports = ApiIterator;
 
 
 /***/ })
