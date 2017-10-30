@@ -39,6 +39,10 @@ header {
   z-index:1000;
 }
 
+#floating-panel {
+  z-index: 1000;
+}
+
 #team-dropdown {
   display: block;
   margin: 0 auto;

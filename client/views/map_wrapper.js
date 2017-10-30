@@ -1,23 +1,11 @@
-var displayDirections = require("./displayDirections")
+var displayDirections = require("./displayDirections");
 
-var MapWrapper = function(lat, lng, zoom) {
+var MapWrapper = function(lat, lng, zoom, initialiseTransitDropdown) {
   var mainDiv = document.getElementById('main-div');
-  var div = document.createElement("div")
-  // div.id = "floating-panel"
-  // var modeSelect = document.createElement("select")
-  // modeSelect.id = "mode"
-  // var carOption = document.createElement("option")
-  // carOption.value = "DRIVING"
-  // carOption.innerText = "Car"
-  // var transitOption = document.createElement("option")
-  // transitOption.value = "TRANSIT"
-  // transitOption.innerText = "Transit"
-  // modeSelect.appendChild(carOption)
-  // modeSelect.appendChild(transitOption)
+
   while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
   var mapDiv = document.createElement("div");
   mapDiv.id = "main-map";
-  // mainDiv.appendChild(modeSelect);
   mainDiv.appendChild(mapDiv);
   this.googleMap = new google.maps.Map( mapDiv, {
     center: {lat: lat, lng: lng},
@@ -26,6 +14,7 @@ var MapWrapper = function(lat, lng, zoom) {
   this.geolocate = this.geolocate.bind(this);
   // this.centerMap = this.centerMap.bind(this);
   this.getDirections = this.getDirections.bind(this);
+  this.initialiseTransitDropdown = initialiseTransitDropdown;
 }
 
 MapWrapper.prototype.getDirections = function(start, end, mode) {
@@ -40,7 +29,8 @@ MapWrapper.prototype.getDirections = function(start, end, mode) {
   directionsService.route(request, function(result, status) {
     directionsRenderer.setDirections(result);
     displayDirections(result)
-  });
+    this.initialiseTransitDropdown();
+  }.bind(this));
 }
 
 MapWrapper.prototype.geolocate = function() {
@@ -52,5 +42,6 @@ MapWrapper.prototype.geolocate = function() {
 //   var center = {lat: position.coords.latitude, lng: position.coords.longitude}
 //   this.googleMap.setCenter(center);
 // }
+
 
 module.exports = MapWrapper;

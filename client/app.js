@@ -5,11 +5,12 @@ var ApiIterator = require("./helpers/api_iterator.js");
 var apiIterator = new ApiIterator();
 var MapWrapper = require('./views/map_wrapper.js');
 var getLeagueTable = require("./views/table_view.js");
+var initialiseTransitDropdown = require("./views/transit_dropdown_view.js");
 var dateTimeConverter = require("./helpers/date_time_converter.js");
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
-    var mapWrapper = new MapWrapper(54.732523, -3, 5);
+    var mapWrapper = new MapWrapper(54.732523, -3, 5, initialiseTransitDropdown);
     var currentPosition;
     navigator.geolocation.getCurrentPosition(function(result) {
       currentPosition = {lat: result.coords.latitude, lng: result.coords.longitude}
@@ -18,16 +19,14 @@ var initialiseDirectionsButton = function(directionsButton) {
         var foundTeam = dbTeams.find(function(dbTeam) {
           return homeTeamName === dbTeam.name;
         });
-        var coordinates;
-        navigator.geolocation.getCurrentPosition(function(result) {
-          coordinates = result;
-        });
         var endLat = foundTeam.latLng[0];
         var endLng = foundTeam.latLng[1];
         var end = {
           lat: endLat,
           lng: endLng
         }
+        var jsonEnd = JSON.stringify(end);
+        localStorage.setItem("current-end-location", jsonEnd);
         var mode = "DRIVING"
         mapWrapper.getDirections(currentPosition, end, mode);
       });
