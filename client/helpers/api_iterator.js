@@ -9,7 +9,8 @@ var ApiIterator = function() {
 ApiIterator.prototype.getKey = function() {
   if ((this.index + 1) < this.apiKeys.length - 1) { this.index ++ }
   if ((this.index + 1) > this.apiKeys.length - 1) { this.index = 0 }
-  return this.apiKeys[0];
+  // return this.apiKeys[0];
+  return this.apiKeys[this.index];
 }
 
 module.exports = ApiIterator;
