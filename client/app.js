@@ -90,10 +90,6 @@ var populateFixturesList = function(team, upcomingFixtures) {
     directionsButton.id = "directions-button";
     directionsButton.innerText = "Stadium Location";
     directionsButton.value = fixture.homeTeamName;
-    var saveFixtureButton = document.createElement("button");
-    saveFixtureButton.id = "save-fixtures-button";
-    saveFixtureButton.innerText = "Save Fixture";
-    saveFixtureButton.value = fixture;
     mainDiv.appendChild(ul);
     ul.appendChild(li);
     li.appendChild(fixtureDiv);
@@ -102,9 +98,7 @@ var populateFixturesList = function(team, upcomingFixtures) {
     fixtureDiv.appendChild(date);
     fixtureDiv.appendChild(time);
     fixtureDiv.appendChild(directionsButton);
-    fixtureDiv.appendChild(saveFixtureButton);
     initialiseDirectionsButton(directionsButton);
-    // initialiseFixtureButton(saveFixtureButton);
   });
 }
 
