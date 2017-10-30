@@ -157,7 +157,7 @@ var getSelectedTeamFixtures = function(teams) {
     }, apitoken, apikey)
     var jsonString = JSON.stringify(team);
     localStorage.setItem("team", jsonString);
-    // getLeagueTable();
+    getLeagueTable();
   })
 }
 
