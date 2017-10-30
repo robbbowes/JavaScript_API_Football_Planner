@@ -64,11 +64,12 @@ header {
 }
 
 #table-div {
-  overflow: visible;
-  order: 1;
+  flex-shrink: 0;
   flex-grow: 1;
+  order: 3;
   background-color: white;
   height: 100%;
+  overflow: scroll;
 }
 
 #main-div {
@@ -85,12 +86,11 @@ header {
 }
 
 #stats-div {
-  flex-shrink: 0;
+  overflow: visible;
+  order: 1;
   flex-grow: 1;
-  order: 3;
   background-color: white;
   height: 100%;
-  overflow: scroll;
 }
 
 #previous-fixtures-list {
@@ -180,7 +180,7 @@ table {
 
 tr {
    border: 1px solid white;
-   padding: 5px;
+   padding: 7px;
 }
 
 td {
