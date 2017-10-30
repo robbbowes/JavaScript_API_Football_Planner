@@ -1,5 +1,5 @@
 body {
-  background-color: dodgerblue;
+  background-color: white;
 }
 
 header {
@@ -51,7 +51,7 @@ header {
   min-height: 100vh;
   margin-top: 250px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   margin-right: 0px;
   margin-left: 0px;
@@ -69,10 +69,12 @@ header {
   flex-shrink: 0;
   order: 2;
   flex-grow: 2;
-  text-align: center;
+  /*text-align: center;*/
   display: flex;
   justify-content: center;
   align-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 #stats-div {
@@ -113,9 +115,14 @@ header {
 
 #fixture-div {
   padding: 7px;
-  background-color: dodgerblue;
+  background-color: #DDDDDD;
   margin: 10px;
   text-align: center;
+  width: 400px;
+  height: 400px;
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 25px;
 }
 
 #home-team-name {

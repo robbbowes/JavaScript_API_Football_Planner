@@ -70,15 +70,15 @@ var populatePreviousFixturesList = function(team, previousFixtures) {
 var populateFixturesList = function(team, upcomingFixtures) {
   var mainDiv = document.getElementById("main-div");
   while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
-  var ul = document.createElement("ul");
-  ul.id = "away-fixtures-list";
+  // var ul = document.createElement("ul");
+  // ul.id = "away-fixtures-list";
   upcomingFixtures.forEach(function(fixture) {
-    var li = document.createElement("li");
+    // var li = document.createElement("li");
     var fixtureDiv = document.createElement("div");
     fixtureDiv.id = "fixture-div";
     var homeTeamName = document.createElement("h5");
     homeTeamName.id = "home-team-name";
-    homeTeamName.innerText = fixture.homeTeamName + " (AWAY)";
+    homeTeamName.innerText = fixture.homeTeamName;
     var homeTeamCrest = document.createElement("img");
     homeTeamCrest.classList += "crest";
     getTeamCrest(homeTeamCrest, fixture);
@@ -90,14 +90,16 @@ var populateFixturesList = function(team, upcomingFixtures) {
     directionsButton.id = "directions-button";
     directionsButton.innerText = "Stadium Location";
     directionsButton.value = fixture.homeTeamName;
-    mainDiv.appendChild(ul);
-    ul.appendChild(li);
-    li.appendChild(fixtureDiv);
+    // mainDiv.appendChild(ul);
+    // ul.appendChild(li);
+    mainDiv.appendChild(fixtureDiv)
+    // li.appendChild(fixtureDiv);
     fixtureDiv.appendChild(homeTeamName);
     fixtureDiv.appendChild(homeTeamCrest);
     fixtureDiv.appendChild(date);
     fixtureDiv.appendChild(time);
     fixtureDiv.appendChild(directionsButton);
+
     initialiseDirectionsButton(directionsButton);
   });
 }
@@ -108,7 +110,7 @@ var setClubLogo = function(team) {
 }
 
 var setBackground = function (team) {
-  var mainDiv = document.getElementById("main-div");
+  var mainDiv = document.getElementById("main-header");
   switch(team.name) {
     case "Newcastle United FC": mainDiv.className = "Newcastle"; break;
     case "Manchester City FC": mainDiv.className = "ManCity"; break;
@@ -141,10 +143,10 @@ var getSelectedTeamFixtures = function(teams) {
     var team = JSON.parse(select.value);
     var fixturesUrl = team._links.fixtures.href;
     requestHelper.getRequest(fixturesUrl, function(info) {
-      var previousFixtures = info.fixtures.filter(function(fixture) {
-        return fixture.status === "FINISHED";
-      });
-      populatePreviousFixturesList(team, previousFixtures)
+      // var previousFixtures = info.fixtures.filter(function(fixture) {
+      //   return fixture.status === "FINISHED";
+      // });
+      // populatePreviousFixturesList(team, previousFixtures)
       var upcomingFixtures = info.fixtures.filter(function(fixture) {
         return fixture.homeTeamName !== team.name
               && fixture.status !== "FINISHED";
@@ -155,7 +157,7 @@ var getSelectedTeamFixtures = function(teams) {
     }, apitoken, apikey)
     var jsonString = JSON.stringify(team);
     localStorage.setItem("team", jsonString);
-    getLeagueTable();
+    // getLeagueTable();
   })
 }
 
