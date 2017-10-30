@@ -90,6 +90,13 @@ header {
   height: 100%;
 }
 
+#instructions-div {
+  flex-shrink: 0;
+  order: 4;
+  background-color: tomato;
+  list-style: none;
+}
+
 #previous-fixtures-list {
   font-family: Palatino;
   list-style: none;
@@ -148,11 +155,11 @@ header {
   height: 20px;
 }
 
-#display-journey-time {
+/*#display-journey-time {
   background-color: dodgerblue;
   position: absolute;
   bottom: 0;
-}
+}*/
 
 .crest {
   height: 165px;
