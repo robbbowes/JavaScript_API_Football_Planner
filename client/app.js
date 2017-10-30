@@ -90,6 +90,10 @@ var populateFixturesList = function(team, upcomingFixtures) {
     directionsButton.id = "directions-button";
     directionsButton.innerText = "Stadium Location";
     directionsButton.value = fixture.homeTeamName;
+    // var saveFixtureButton = document.createElement("button");
+    // saveFixtureButton.id = "save-fixtures-button";
+    // saveFixtureButton.innerText = "Save Fixture";
+    // saveFixtureButton.value = fixture;
     mainDiv.appendChild(ul);
     ul.appendChild(li);
     li.appendChild(fixtureDiv);
@@ -98,7 +102,9 @@ var populateFixturesList = function(team, upcomingFixtures) {
     fixtureDiv.appendChild(date);
     fixtureDiv.appendChild(time);
     fixtureDiv.appendChild(directionsButton);
+    // fixtureDiv.appendChild(saveFixtureButton);
     initialiseDirectionsButton(directionsButton);
+    // initialiseFixtureButton(saveFixtureButton);
   });
 }
 
@@ -153,6 +159,8 @@ var getSelectedTeamFixtures = function(teams) {
       setClubLogo(team);
       setBackground(team);
     }, apitoken, apikey)
+    var jsonString = JSON.stringify(team);
+    localStorage.setItem("team", jsonString);
     getLeagueTable();
   })
 }
@@ -178,4 +186,6 @@ var populateDropdown = function(information) {
 window.addEventListener("DOMContentLoaded", function() {
   var apikey = apiIterator.getKey();
   requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey);
+  var jsonString = localStorage.getItem("team");
+  console.log(jsonString);
 });
