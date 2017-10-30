@@ -10,7 +10,8 @@ var dateTimeConverter = require("./helpers/date_time_converter.js");
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
-    var mapWrapper = new MapWrapper(54.732523, -3, 5, initialiseTransitDropdown);
+    var mainDiv = document.getElementById("main-div");
+    mapWrapper.newMap(mainDiv);
     var currentPosition;
     navigator.geolocation.getCurrentPosition(function(result) {
       currentPosition = {lat: result.coords.latitude, lng: result.coords.longitude}
@@ -19,16 +20,15 @@ var initialiseDirectionsButton = function(directionsButton) {
         var foundTeam = dbTeams.find(function(dbTeam) {
           return homeTeamName === dbTeam.name;
         });
-        var endLat = foundTeam.latLng[0];
-        var endLng = foundTeam.latLng[1];
         var end = {
-          lat: endLat,
-          lng: endLng
+          lat: foundTeam.latLng[0],
+          lng: foundTeam.latLng[1]
         }
         var jsonEnd = JSON.stringify(end);
         localStorage.setItem("current-end-location", jsonEnd);
         var mode = "DRIVING"
         mapWrapper.getDirections(currentPosition, end, mode);
+        initialiseTransitDropdown(mapWrapper);
       });
     });
   });
@@ -193,6 +193,7 @@ var getStoredTeamFixtures = function(team) {
 }
 
 window.addEventListener("DOMContentLoaded", function() {
+  mapWrapper = new MapWrapper();
   var apikey = apiIterator.getKey();
   requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey);
   var jsonString = localStorage.getItem("team");

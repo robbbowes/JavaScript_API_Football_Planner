@@ -1,8 +1,7 @@
 var MapWrapper = require('./map_wrapper.js');
-console.log(MapWrapper);
 
 
-var initialiseTransitDropdown = function() {
+var initialiseTransitDropdown = function(mapWrapper) {
   var mainDiv = document.getElementById("main-div")
   var div = document.createElement("div");
   div.id = "floating-panel";
@@ -21,11 +20,6 @@ var initialiseTransitDropdown = function() {
   modeSelect.addEventListener("change", function() {
     var end = JSON.parse(localStorage.getItem("current-end-location"));
     var transitOption = document.getElementById("mode").value;
-    // console.log(google.maps.Map);
-
-    var mapWrapper = new MapWrapper(54.732523, -3, 5, initialiseTransitDropdown);
-    console.log(MapWrapper);
-
     navigator.geolocation.getCurrentPosition(function(result) {
       currentPosition = {lat: result.coords.latitude, lng: result.coords.longitude}
         mapWrapper.getDirections(currentPosition, end, transitOption);
