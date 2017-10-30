@@ -183,21 +183,21 @@ db.teams.insert([
   }
 ])
 
-// db.tableData.insert({
-//   standing: [
-//     {
-//       "position": 1,
-//       "teamName": "Manchester City FC",
-//       "playedGames": 10,
-//       "points": 28,
-//       "goalDifference": 29
-//     },
-//     {
-//       "position": 2,
-//       "teamName": "Manchester United FC",
-//       "playedGames": 10,
-//       "points": 23,
-//       "goalDifference": 19,
-//     }
-//   ]
-// })
+db.tableData.insert({
+  standing: [
+    {
+      "position": 1,
+      "teamName": "Manchester City FC",
+      "playedGames": 10,
+      "points": 28,
+      "goalDifference": 29
+    },
+    {
+      "position": 2,
+      "teamName": "Manchester United FC",
+      "playedGames": 10,
+      "points": 23,
+      "goalDifference": 19,
+    }
+  ]
+})
