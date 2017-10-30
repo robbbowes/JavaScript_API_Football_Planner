@@ -29,7 +29,9 @@ header {
 }
 
 #team-dropdown-div {
-  background-color: dodgerblue;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  background-color: white;
   padding-bottom: 7px;
   position: fixed;
   width: 100%;
@@ -65,7 +67,7 @@ header {
   overflow: visible;
   order: 1;
   flex-grow: 1;
-  background-color: #dddddd;
+  background-color: white;
   height: 100%;
 }
 
@@ -88,6 +90,7 @@ header {
   order: 3;
   background-color: white;
   height: 100%;
+  overflow: scroll;
 }
 
 #previous-fixtures-list {
@@ -140,8 +143,7 @@ header {
   font-family: Palatino, "Palatino Linotype";
   width: 380px;
   height: 750px;
-  font-size: 20px;
-  background-color: #dddddd;
+  background-color: #white;
 }
 
 #mode {
@@ -169,6 +171,20 @@ h5 {
 
 p {
   margin-bottom: 2px;
+}
+
+table {
+  border-collapse: collapse;
+  background-color: #dddddd;
+}
+
+tr {
+   border: 1px solid white;
+   padding: 5px;
+}
+
+td {
+  padding: 10px;
 }
 
 @media (max-width: 600px) {

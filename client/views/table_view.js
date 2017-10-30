@@ -5,8 +5,8 @@ var apikey = '16bf6721521f4342aca8f7c7656dff95';
 
 var populateLeagueTable = function(leagueTable) {
   var select = document.getElementById("team-dropdown");
-  var selectedTeam = JSON.parse(select.value);
-  var selectedTeamName = selectedTeam.name;
+    var selectedTeam = JSON.parse(select.value);
+    var selectedTeamName = selectedTeam.name;
 
   var table = document.getElementById("league-table");
   var tableDiv = document.getElementById("stats-div")
@@ -15,7 +15,6 @@ var populateLeagueTable = function(leagueTable) {
   var thead = document.createElement("thead");
   var theadRow = document.createElement("tr");
   var hRank = document.createElement("tr");
-  hRank.innerText = "Rank";
   var hTeam = document.createElement("td");
   hTeam.innerText = "Team";
   var hPlayed = document.createElement("td");
