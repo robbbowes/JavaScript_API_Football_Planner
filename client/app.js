@@ -94,8 +94,8 @@ var populateFixturesList = function(team, upcomingFixtures) {
     // ul.appendChild(li);
     mainDiv.appendChild(fixtureDiv)
     // li.appendChild(fixtureDiv);
-    fixtureDiv.appendChild(homeTeamName);
     fixtureDiv.appendChild(homeTeamCrest);
+    fixtureDiv.appendChild(homeTeamName);
     fixtureDiv.appendChild(date);
     fixtureDiv.appendChild(time);
     fixtureDiv.appendChild(directionsButton);

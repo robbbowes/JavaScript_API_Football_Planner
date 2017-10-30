@@ -152,10 +152,19 @@ header {
 
 .crest {
   height: 165px;
+  margin-bottom: 20px;
 }
 
 .highlighted {
   background-color: dodgerblue;
+}
+
+h5 {
+  font-size: 30px;
+}
+
+p {
+  margin-bottom: 2px;
 }
 
 @media (max-width: 600px) {
