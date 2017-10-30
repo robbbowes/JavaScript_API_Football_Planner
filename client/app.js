@@ -9,7 +9,7 @@ var dateTimeConverter = require("./helpers/date_time_converter.js");
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
-    var mapWrapper = new MapWrapper(52.3916428, -2.0951209, 15);
+    var mapWrapper = new MapWrapper(54.732523, -3, 5);
     var currentPosition;
     navigator.geolocation.getCurrentPosition(function(result) {
       currentPosition = {lat: result.coords.latitude, lng: result.coords.longitude}
@@ -46,7 +46,7 @@ var getTeamCrest = function(crestImg, fixture) {
 var populatePreviousFixturesList = function(team, previousFixtures) {
   var statsDiv = document.getElementById("stats-div");
   while (statsDiv.firstChild) { statsDiv.removeChild(statsDiv.firstChild) }
-  statsDiv.style.backgroundColor = "wheat"
+  statsDiv.style.backgroundColor = "white"
   var ul = document.createElement("ul");
   ul.id = "previous-fixtures-list";
   statsDiv.appendChild(ul);
@@ -71,10 +71,6 @@ var populateFixturesList = function(team, upcomingFixtures) {
   var mainDiv = document.getElementById("main-div");
   while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
   var ul = document.createElement("ul");
-  var awayFixturesHeader = document.createElement("h2")
-  awayFixturesHeader.id = "away-fixtures-header"
-  awayFixturesHeader.innerText = "Upcoming Away Fixtures:"
-  mainDiv.appendChild(awayFixturesHeader)
   ul.id = "away-fixtures-list";
   upcomingFixtures.forEach(function(fixture) {
     var li = document.createElement("li");
