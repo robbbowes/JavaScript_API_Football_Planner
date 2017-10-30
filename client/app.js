@@ -169,7 +169,7 @@ var populateDropdown = function(information) {
   var select = document.querySelector('#team-dropdown');
   while (select.firstChild) { select.removeChild(select.firstChild) }
   var disabledOption = document.createElement("option");
-  disabledOption.innerText = "Choose your team";
+  disabledOption.innerText = "Choose a different team";
   disabledOption.disabled = true;
   disabledOption.selected = true;
   var teams = information.teams;
@@ -183,9 +183,26 @@ var populateDropdown = function(information) {
   getSelectedTeamFixtures(teams);
 }
 
+var getStoredTeamFixtures = function(team) {
+  var apikey = apiIterator.getKey();
+  var fixturesUrl = team._links.fixtures.href;
+  requestHelper.getRequest(fixturesUrl, function(info) {
+    var upcomingFixtures = info.fixtures.filter(function(fixture) {
+      return fixture.homeTeamName !== team.name
+            && fixture.status !== "FINISHED";
+    });
+    populateFixturesList(team, upcomingFixtures);
+    setClubLogo(team);
+    setBackground(team);
+  }, apitoken, apikey)
+}
+
 window.addEventListener("DOMContentLoaded", function() {
   var apikey = apiIterator.getKey();
   requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey);
   var jsonString = localStorage.getItem("team");
-  console.log(jsonString);
+  if (jsonString !== null) {
+    savedTeam = JSON.parse(jsonString)
+    getStoredTeamFixtures(savedTeam)
+  }
 });
