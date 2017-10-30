@@ -4,6 +4,7 @@ var apikey = '16bf6721521f4342aca8f7c7656dff95';
 
 
 var populateLeagueTable = function(leagueTable) {
+  console.log(leagueTable);
   var jsonString = localStorage.getItem("team");
   if (jsonString !== null) {
     var selectedTeam = JSON.parse(jsonString)
@@ -34,7 +35,7 @@ var populateLeagueTable = function(leagueTable) {
 
   var tbody = document.createElement("tbody");
   table.appendChild(tbody);
-  leagueTable.standing.forEach(function(team) {
+  leagueTable[0].standing.forEach(function(team) {
     var tr = document.createElement("tr");
     var rank = document.createElement("td");
     rank.innerText = team.position;
@@ -58,7 +59,7 @@ var populateLeagueTable = function(leagueTable) {
 
 
 var getLeagueTable = function() {
-  requestHelper.getRequest("http://api.football-data.org/v1/competitions/445/leagueTable", populateLeagueTable, apitoken, apikey)
+  requestHelper.getRequest("http://localhost:3000/api/tableData", populateLeagueTable, apitoken, apikey)
 }
 
 module.exports = getLeagueTable
