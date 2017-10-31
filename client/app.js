@@ -8,6 +8,7 @@ var getLeagueTable = require("./views/table_view.js");
 var initialiseTransitDropdown = require("./views/transit_dropdown_view.js");
 var dateTimeConverter = require("./helpers/date_time_converter.js");
 var teamCrests = require("./helpers/crests.js");
+var clearHTML = require("./helpers/clearHTML.js")
 
 var removeBackButton = function() {
   var div = document.getElementById("team-dropdown-div");
@@ -89,9 +90,9 @@ var initialiseBackButton = function() {
   header.appendChild(button);
   button.addEventListener("click", function() {
     var instructionsDiv = document.getElementById("instructions-div");
-    while (instructionsDiv.firstChild) { instructionsDiv.removeChild(instructionsDiv.firstChild) }
+    clearHTML("instructions-div");
     var statsDiv = document.getElementById("stats-div");
-    while (statsDiv.firstChild) { statsDiv.removeChild(statsDiv.firstChild) }
+    clearHTML("stats-div");
     var team = JSON.parse(localStorage.getItem("team"));
     getStoredTeamFixtures(team);
     removeBackButton();
@@ -108,7 +109,7 @@ var initialiseDirectionsButton = function(directionsButton) {
     // mainDiv.appendChild(loadingDiv);
     // console.log("loader added: "+loadingDiv);
     // loadingImg.src = "https://cdn.dribbble.com/users/494229/screenshots/1601132/loadingicon14.gif"
-    while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
+    clearHTML("main-div");
     var awayFixtureInfoDiv = document.createElement("div");
     awayFixtureInfoDiv.id = "away-fixture-info-div";
     mainDiv.appendChild(awayFixtureInfoDiv);
@@ -158,7 +159,7 @@ var getAwayTeamCrest = function(crestImg, fixture) {
 
 var populatePreviousFixturesList = function(team, previousFixtures) {
   var statsDiv = document.getElementById("stats-div");
-  while (statsDiv.firstChild) { statsDiv.removeChild(statsDiv.firstChild) }
+  clearHTML("stats-div");
   statsDiv.style.backgroundColor = "white"
   var ul = document.createElement("ul");
   ul.id = "previous-fixtures-list";
@@ -204,7 +205,7 @@ var initialiseStar = function(fixture) {
 
 var populateFixturesList = function(team, upcomingFixtures) {
   var mainDiv = document.getElementById("main-div");
-  while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
+  clearHTML("main-div");
   upcomingFixtures.forEach(function(fixture) {
     var fixtureDiv = document.createElement("div");
     fixtureDiv.id = "fixture-div";
@@ -280,7 +281,7 @@ var getSelectedTeamFixtures = function(teams) {
   var select = document.querySelector("#team-dropdown");
   select.addEventListener("change", function() {
     var statsDiv = document.getElementById("stats-div");
-    while (statsDiv.firstChild) { statsDiv.removeChild(statsDiv.firstChild) }
+    clearHTML("stats-div");
     var apikey = apiIterator.getKey();
     var team = JSON.parse(select.value);
     var fixturesUrl = team._links.fixtures.href;
@@ -302,9 +303,27 @@ var getSelectedTeamFixtures = function(teams) {
   })
 }
 
+var createIntroText = function() {
+  var mainDiv = document.getElementById("main-div");
+  var introDiv = document.createElement("div");
+  introDiv.id = "intro-div";
+  var introHeading = document.createElement("h3");
+  introHeading.innerHTML = "Support your team, home and away."
+  introHeading.id = "intro-heading"
+  var introText = document.createElement("p");
+  introText.innerHTML = "The Premier League Away Day Planner allows you to follow your favourite team across the country."+
+  "<br><br>You can find out your information about your team's upcoming fixtures, and plan your route to the next big match."+
+  "<br><br>To use the Away Day Planner, just select your favourite team, browse the list of fixtures, and select from a range"+
+  " of travel options. You can also save a fixture and come back to it later.";
+  introText.id = "intro-text";
+  introDiv.appendChild(introHeading);
+  introDiv.appendChild(introText);
+  mainDiv.appendChild(introDiv);
+}
+
 var populateDropdown = function(information) {
   var select = document.querySelector('#team-dropdown');
-  while (select.firstChild) { select.removeChild(select.firstChild) }
+  clearHTML("team-dropdown");
   var disabledOption = document.createElement("option");
   disabledOption.innerText = "Choose a different team";
   disabledOption.disabled = true;
@@ -317,12 +336,13 @@ var populateDropdown = function(information) {
     option.value = JSON.stringify(team);
     select.appendChild(option);
   });
+  createIntroText();
   getSelectedTeamFixtures(teams);
 }
 
 var getStoredTeamFixtures = function(team) {
   var statsDiv = document.getElementById("stats-div");
-  while (statsDiv.firstChild) { statsDiv.removeChild(statsDiv.firstChild) }
+  clearHTML("stats-div");
   var apikey = apiIterator.getKey();
   var fixturesUrl = team._links.fixtures.href;
   requestHelper.getRequest(fixturesUrl, function(info) {
@@ -334,7 +354,6 @@ var getStoredTeamFixtures = function(team) {
     populateFixturesList(team, upcomingFixtures);
     removeBackButton();
     setClubLogo(team);
-    // setClubTitle(team);
     setBackground(team);
   }, apitoken, apikey)
 }

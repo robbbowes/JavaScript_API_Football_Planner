@@ -19,6 +19,8 @@ header {
   max-width: 400px;
   padding-top: 30px;
   padding-left: 10px;
+  padding-bottom: 20px;
+  margin-top: -15px;
 }
 
 #club-logo {
@@ -26,6 +28,7 @@ header {
   padding-top: 30px;
   padding-right: 60px;
   float: right;
+  margin-top: -15px;
 }
 
 #team-dropdown-div {
@@ -63,6 +66,17 @@ header {
   flex-wrap: wrap;
   margin-right: 0px;
   margin-left: 0px;
+}
+
+#intro-heading {
+  font-size: 36px;
+  color: #3D1C5A;
+}
+
+#intro-text {
+  font-size: 28px;
+  color: #3D1C5A;
+
 }
 
 #instructions-container {

@@ -1,6 +1,7 @@
 var requestHelper = require("../helpers/request_helper.js");
 var apitoken = 'X-Auth-Token';
 var apikey = '16bf6721521f4342aca8f7c7656dff95';
+var clearHTML = require("../helpers/clearHTML.js");
 
 
 var populateLeagueTable = function(leagueTable) {
@@ -13,7 +14,7 @@ var populateLeagueTable = function(leagueTable) {
   console.log("table = ", table);
   var tableDiv = document.getElementById("table-div")
   tableDiv.style.backgroundColor = 'white'
-  while (table.firstChild) { table.removeChild(table.firstChild) }
+  clearHTML("league-table");
   var thead = document.createElement("thead");
   var theadRow = document.createElement("tr");
   var hRank = document.createElement("tr");
