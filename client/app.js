@@ -9,6 +9,11 @@ var initialiseTransitDropdown = require("./views/transit_dropdown_view.js");
 var dateTimeConverter = require("./helpers/date_time_converter.js");
 var teamCrests = require("./helpers/crests.js");
 
+var initialiseFavouriteButton = function(jsonFixture) {
+  var fixture = JSON.parse(jsonFixture);
+  console.log(fixture);
+}
+
 var initialiseBackButton = function() {
   var button = document.createElement("button");
   button.innerText = "Return to fixtures";
@@ -34,7 +39,8 @@ var initialiseDirectionsButton = function(directionsButton) {
     var currentPosition;
     navigator.geolocation.getCurrentPosition(function(result) {
       currentPosition = {lat: result.coords.latitude, lng: result.coords.longitude}
-      var homeTeamName = directionsButton.value;
+      var homeTeamName = JSON.parse(directionsButton.value).homeTeamName;
+      console.log(homeTeamName);
       requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
         var foundTeam = dbTeams.find(function(dbTeam) {
           return homeTeamName === dbTeam.name;
@@ -47,6 +53,7 @@ var initialiseDirectionsButton = function(directionsButton) {
         localStorage.setItem("current-end-location", jsonEnd);
         var mode = "DRIVING"
         mapWrapper.getDirections(currentPosition, end, mode);
+        initialiseFavouriteButton(directionsButton.value)
         initialiseTransitDropdown(mapWrapper);
         initialiseBackButton();
       });
@@ -96,6 +103,30 @@ var populatePreviousFixturesList = function(team, previousFixtures) {
   })
 }
 
+// var initialiseStar = function(fixture) {
+//   var star = fixture.star;
+//   star.addEventListener("click", function() {
+//     star.selected = !star.selected;
+//     if (star.selected) {
+//       star.src = "https://thecliparts.com/wp-content/uploads/2017/04/dark-blue-star-clipart.png";
+//       var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
+//       favouriteFixtures.push(fixture);
+//       console.log(favouriteFixtures);
+//       localStorage.setItem("favouriteFixtures", JSON.stringify(favouriteFixtures));
+//     }
+//     if (!star.selected) {
+//       star.src = "http://images.clipartpanda.com/star-clipart-black-and-white-RTG7BpqTL.png";
+//       var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
+//       var newFavouriteFixtures = favouriteFixtures.filter(function(localStorageFixture) {
+//         return fixture.homeTeamName === localStorageFixture.homeTeamName
+//               && fixture.awayTeamName === localStorageFixture.awayTeamName;
+//       });
+//       console.log(newFavouriteFixtures);
+//       localStorage.setItem("favouriteFixtures", JSON.stringify(newFavouriteFixtures));
+//     }
+//   });
+// }
+
 var populateFixturesList = function(team, upcomingFixtures) {
   var mainDiv = document.getElementById("main-div");
   while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
@@ -105,6 +136,11 @@ var populateFixturesList = function(team, upcomingFixtures) {
     var homeTeamName = document.createElement("h5");
     homeTeamName.id = "home-team-name";
     homeTeamName.innerText = fixture.homeTeamName;
+    // var star = document.createElement("img");
+    // star.id = "star";
+    // fixture.star = star;
+    // initialiseStar(fixture);
+    // console.log(star.selected);
     var homeTeamCrest = document.createElement("img");
     homeTeamCrest.classList += "crest";
     getTeamCrest(homeTeamCrest, fixture);
@@ -115,8 +151,9 @@ var populateFixturesList = function(team, upcomingFixtures) {
     var directionsButton = document.createElement("button");
     directionsButton.id = "directions-button";
     directionsButton.innerText = "Stadium Location";
-    directionsButton.value = fixture.homeTeamName;
+    directionsButton.value = JSON.stringify(fixture);
     mainDiv.appendChild(fixtureDiv)
+    // fixtureDiv.appendChild(star)
     fixtureDiv.appendChild(homeTeamCrest);
     fixtureDiv.appendChild(homeTeamName);
     fixtureDiv.appendChild(date);
