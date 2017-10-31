@@ -32,6 +32,10 @@ MapWrapper.prototype = {
       travelMode: mode
     }
     this.directionsService.route(request, function(result, status) {
+      // var mainDiv = document.getElementById("main-div");
+      // var loadingDiv = document.getElementById("loader");
+      // console.log("loadingDiv" + loadingDiv);
+      // mainDiv.removeChild(loadingDiv);
       this.directionsRenderer.setDirections(result);
       displayDirections(result)
     }.bind(this));

@@ -44,17 +44,22 @@ var initialiseFixtureInfo = function(jsonFixture) {
   fixtureDiv.appendChild(awayDiv);
   fixtureDiv.id = "away-fixture-team-div";
 
+  var ticketForm = document.createElement("form");
+  var input = document.createElement("input");
+  input.type = "submit";
+  input.value = "Buy Tickets"
+
+
   var awayFixtureInfoDiv = document.getElementById("away-fixture-info-div");
   awayFixtureInfoDiv.appendChild(fixtureDiv);
 
   var stadiumImg = document.createElement("img");
   requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
     var foundTeam = dbTeams.find(function(dbTeam) {
-      console.log(dbTeam.name);
-      console.log(homeTeamName);
       return dbTeam.name === homeTeamName.innerText;
     });
     stadiumImg.src = foundTeam.stadiumPicture;
+    ticketForm.href = foundTeam.ticketLink;
   });
   stadiumImg.id = "stadium-image";
   awayFixtureInfoDiv.appendChild(stadiumImg);
@@ -86,6 +91,13 @@ var initialiseBackButton = function() {
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
     var mainDiv = document.getElementById("main-div");
+    // var loadingDiv = document.createElement("div");
+    // var loadingImg = document.createElement("img");
+    // loadingDiv.appendChild(loadingImg);
+    // loadingDiv.id = "loader"
+    // mainDiv.appendChild(loadingDiv);
+    // console.log("loader added: "+loadingDiv);
+    // loadingImg.src = "https://cdn.dribbble.com/users/494229/screenshots/1601132/loadingicon14.gif"
     while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
     var awayFixtureInfoDiv = document.createElement("div");
     awayFixtureInfoDiv.id = "away-fixture-info-div";
@@ -158,29 +170,27 @@ var populatePreviousFixturesList = function(team, previousFixtures) {
   })
 }
 
-// var initialiseStar = function(fixture) {
-//   var star = fixture.star;
-//   star.addEventListener("click", function() {
-//     star.selected = !star.selected;
-//     if (star.selected) {
-//       star.src = "https://thecliparts.com/wp-content/uploads/2017/04/dark-blue-star-clipart.png";
-//       var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
-//       favouriteFixtures.push(fixture);
-//       console.log(favouriteFixtures);
-//       localStorage.setItem("favouriteFixtures", JSON.stringify(favouriteFixtures));
-//     }
-//     if (!star.selected) {
-//       star.src = "http://images.clipartpanda.com/star-clipart-black-and-white-RTG7BpqTL.png";
-//       var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
-//       var newFavouriteFixtures = favouriteFixtures.filter(function(localStorageFixture) {
-//         return fixture.homeTeamName === localStorageFixture.homeTeamName
-//               && fixture.awayTeamName === localStorageFixture.awayTeamName;
-//       });
-//       console.log(newFavouriteFixtures);
-//       localStorage.setItem("favouriteFixtures", JSON.stringify(newFavouriteFixtures));
-//     }
-//   });
-// }
+var initialiseStar = function(fixture) {
+  var star = fixture.star;
+  star.addEventListener("click", function() {
+    star.selected = !star.selected;
+    if (star.selected) {
+      star.src = "https://thecliparts.com/wp-content/uploads/2017/04/dark-blue-star-clipart.png";
+      var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
+      favouriteFixtures.push(fixture);
+      localStorage.setItem("favouriteFixtures", JSON.stringify(favouriteFixtures));
+    }
+    if (!star.selected) {
+      star.src = "http://images.clipartpanda.com/star-clipart-black-and-white-RTG7BpqTL.png";
+      var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
+      var newFavouriteFixtures = favouriteFixtures.filter(function(localStorageFixture) {
+        return fixture.homeTeamName === localStorageFixture.homeTeamName
+              && fixture.awayTeamName === localStorageFixture.awayTeamName;
+      });
+      localStorage.setItem("favouriteFixtures", JSON.stringify(newFavouriteFixtures));
+    }
+  });
+}
 
 var populateFixturesList = function(team, upcomingFixtures) {
   var mainDiv = document.getElementById("main-div");
@@ -191,11 +201,10 @@ var populateFixturesList = function(team, upcomingFixtures) {
     var homeTeamName = document.createElement("h5");
     homeTeamName.id = "home-team-name";
     homeTeamName.innerText = fixture.homeTeamName;
-    // var star = document.createElement("img");
-    // star.id = "star";
-    // fixture.star = star;
-    // initialiseStar(fixture);
-    // console.log(star.selected);
+    var star = document.createElement("img");
+    star.id = "star";
+    fixture.star = star;
+    initialiseStar(fixture);
     var homeTeamCrest = document.createElement("img");
     homeTeamCrest.classList += "crest";
     getHomeTeamCrest(homeTeamCrest, fixture);
