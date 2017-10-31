@@ -7,6 +7,7 @@ var MapWrapper = require('./views/map_wrapper.js');
 var getLeagueTable = require("./views/table_view.js");
 var initialiseTransitDropdown = require("./views/transit_dropdown_view.js");
 var dateTimeConverter = require("./helpers/date_time_converter.js");
+var teamCrests = require("./helpers/crests.js");
 
 var initialiseBackButton = function() {
   var button = document.createElement("button");
@@ -60,12 +61,22 @@ var initialiseDirectionsButton = function(directionsButton) {
 }
 
 var getTeamCrest = function(crestImg, fixture) {
-  var url = fixture._links.homeTeam.href;
-  var apikey = apiIterator.getKey();
-  requestHelper.getRequest(url, function(team) {
-    crestImg.src = team.crestUrl;
-  }, apitoken, apikey)
+  homeTeamName = fixture.homeTeamName;
+  teamCrests.forEach(function(team) {
+    if(team.name === homeTeamName) {
+      crestImg.src = team.url
+    }
+  })
 }
+
+// var getTeamCrest = function(crestImg, fixture) {
+//   console.log(fixture);
+//   var url = fixture._links.homeTeam.href;
+//   var apikey = apiIterator.getKey();
+//   requestHelper.getRequest(url, function(team) {
+//     crestImg.src = team.crestUrl;
+//   }, apitoken, apikey)
+// }
 
 var populatePreviousFixturesList = function(team, previousFixtures) {
   var statsDiv = document.getElementById("stats-div");
@@ -117,7 +128,6 @@ var populateFixturesList = function(team, upcomingFixtures) {
     fixtureDiv.appendChild(date);
     fixtureDiv.appendChild(time);
     fixtureDiv.appendChild(directionsButton);
-
     initialiseDirectionsButton(directionsButton);
   });
 }
@@ -161,10 +171,6 @@ var getSelectedTeamFixtures = function(teams) {
     var team = JSON.parse(select.value);
     var fixturesUrl = team._links.fixtures.href;
     requestHelper.getRequest(fixturesUrl, function(info) {
-      // var previousFixtures = info.fixtures.filter(function(fixture) {
-      //   return fixture.status === "FINISHED";
-      // });
-      // populatePreviousFixturesList(team, previousFixtures)
       var upcomingFixtures = info.fixtures.filter(function(fixture) {
         return fixture.homeTeamName !== team.name
               && fixture.status !== "FINISHED"
