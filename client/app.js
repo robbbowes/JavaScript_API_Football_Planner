@@ -20,21 +20,14 @@ var initialiseBackButton = function() {
     var statsDiv = document.getElementById("stats-div");
     while (statsDiv.firstChild) { statsDiv.removeChild(statsDiv.firstChild) }
     var team = JSON.parse(localStorage.getItem("team"));
-    console.log(team);
     getStoredTeamFixtures(team);
-    var leagueTable = document.createElement("table");
-    leagueTable.id = "league-table";
-    console.log("newly created table: "+document.getElementById("league-table"));
-    getLeagueTable();
-  })
+  });
 }
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
     var mainDiv = document.getElementById("main-div");
     while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
-    var tableDiv = document.getElementById("table-div");
-    while (tableDiv.firstChild) { tableDiv.removeChild(tableDiv.firstChild) }
     var statsDiv = document.getElementById("stats-div");
     mapWrapper.newMap(statsDiv);
     var currentPosition;
@@ -167,6 +160,8 @@ var setBackground = function (team) {
 var getSelectedTeamFixtures = function(teams) {
   var select = document.querySelector("#team-dropdown");
   select.addEventListener("change", function() {
+    var statsDiv = document.getElementById("stats-div");
+    while (statsDiv.firstChild) { statsDiv.removeChild(statsDiv.firstChild) }
     var apikey = apiIterator.getKey();
     var team = JSON.parse(select.value);
     var fixturesUrl = team._links.fixtures.href;
@@ -205,6 +200,8 @@ var populateDropdown = function(information) {
 }
 
 var getStoredTeamFixtures = function(team) {
+  var statsDiv = document.getElementById("stats-div");
+  while (statsDiv.firstChild) { statsDiv.removeChild(statsDiv.firstChild) }
   var apikey = apiIterator.getKey();
   var fixturesUrl = team._links.fixtures.href;
   requestHelper.getRequest(fixturesUrl, function(info) {
