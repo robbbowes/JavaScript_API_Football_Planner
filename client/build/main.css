@@ -64,7 +64,7 @@ header {
 }
 
 #instructions-container {
-  height: 600px;
+  height: 100vh;
   width: 600px;
   padding: 10px;
 }
@@ -74,7 +74,7 @@ header {
   flex-grow: 1;
   order: 3;
   background-color: white;
-  height: 100%;
+  height: 100vh;
   overflow: scroll;
 }
 
@@ -109,7 +109,7 @@ header {
 }
 
 #previous-fixtures-list {
-  font-family: Palatino;
+  font-family: Helvetica;
   list-style: none;
   font-size: 20px;
   height: 750px;
@@ -154,11 +154,16 @@ header {
 }*/
 
 #league-table {
+  margin: 8px;
   position: sticky;
   font-family: Palatino, "Palatino Linotype";
   width: 380px;
   height: 750px;
-  background-color: #white;
+  border: black;
+  background-color: #DDDDDD;
+  border-radius: 12px;
+  flex-wrap: wrap;
+  box-shadow: inset 0 0 10px #000000;
 }
 
 #mode {
