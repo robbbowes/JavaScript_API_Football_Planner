@@ -8,10 +8,34 @@ var getLeagueTable = require("./views/table_view.js");
 var initialiseTransitDropdown = require("./views/transit_dropdown_view.js");
 var dateTimeConverter = require("./helpers/date_time_converter.js");
 
+var initialiseBackButton = function() {
+  var button = document.createElement("button");
+  button.innerText = "Return to fixtures";
+  var mainDiv = document.getElementById("main-div");
+  mainDiv.appendChild(button);
+  button.addEventListener("click", function() {
+    var instructionsDiv = document.getElementById("instructions-div");
+    while (instructionsDiv.firstChild) { instructionsDiv.removeChild(instructionsDiv.firstChild) }
+    var statsDiv = document.getElementById("stats-div");
+    while (statsDiv.firstChild) { statsDiv.removeChild(statsDiv.firstChild) }
+    var team = JSON.parse(localStorage.getItem("team"));
+    console.log(team);
+    getStoredTeamFixtures(team);
+    var leagueTable = document.createElement("table");
+    leagueTable.id = "league-table";
+    console.log("newly created table: "+document.getElementById("league-table"));
+    getLeagueTable();
+  })
+}
+
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
     var mainDiv = document.getElementById("main-div");
-    mapWrapper.newMap(mainDiv);
+    while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
+    var tableDiv = document.getElementById("table-div");
+    while (tableDiv.firstChild) { tableDiv.removeChild(tableDiv.firstChild) }
+    var statsDiv = document.getElementById("stats-div");
+    mapWrapper.newMap(statsDiv);
     var currentPosition;
     navigator.geolocation.getCurrentPosition(function(result) {
       currentPosition = {lat: result.coords.latitude, lng: result.coords.longitude}
@@ -29,6 +53,7 @@ var initialiseDirectionsButton = function(directionsButton) {
         var mode = "DRIVING"
         mapWrapper.getDirections(currentPosition, end, mode);
         initialiseTransitDropdown(mapWrapper);
+        initialiseBackButton();
       });
     });
   });
@@ -142,7 +167,8 @@ var getSelectedTeamFixtures = function(teams) {
       // populatePreviousFixturesList(team, previousFixtures)
       var upcomingFixtures = info.fixtures.filter(function(fixture) {
         return fixture.homeTeamName !== team.name
-              && fixture.status !== "FINISHED";
+              && fixture.status !== "FINISHED"
+              && fixture.matchday > 10;
       });
       populateFixturesList(team, upcomingFixtures);
       setClubLogo(team);
@@ -178,7 +204,8 @@ var getStoredTeamFixtures = function(team) {
   requestHelper.getRequest(fixturesUrl, function(info) {
     var upcomingFixtures = info.fixtures.filter(function(fixture) {
       return fixture.homeTeamName !== team.name
-            && fixture.status !== "FINISHED";
+            && fixture.status !== "FINISHED"
+            && fixture.matchday > 10;
     });
     populateFixturesList(team, upcomingFixtures);
     setClubLogo(team);

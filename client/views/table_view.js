@@ -4,13 +4,13 @@ var apikey = '16bf6721521f4342aca8f7c7656dff95';
 
 
 var populateLeagueTable = function(leagueTable) {
-  console.log(leagueTable);
   var jsonString = localStorage.getItem("team");
   if (jsonString !== null) {
     var selectedTeam = JSON.parse(jsonString)
     var selectedTeamName = selectedTeam.name;
   }
   var table = document.getElementById("league-table");
+  console.log("table = ", table);
   var tableDiv = document.getElementById("table-div")
   tableDiv.style.backgroundColor = 'white'
   while (table.firstChild) { table.removeChild(table.firstChild) }
