@@ -18,8 +18,8 @@ var initialiseBackButton = function() {
   var button = document.createElement("button");
   button.innerText = "Return to fixtures";
   button.id = "back-button";
-  var mainDiv = document.getElementById("main-div");
-  mainDiv.appendChild(button);
+  var header = document.getElementById("team-dropdown-div");
+  header.appendChild(button);
   button.addEventListener("click", function() {
     var instructionsDiv = document.getElementById("instructions-div");
     while (instructionsDiv.firstChild) { instructionsDiv.removeChild(instructionsDiv.firstChild) }
@@ -150,7 +150,7 @@ var populateFixturesList = function(team, upcomingFixtures) {
     time.innerText = dateTimeConverter(fixture.date).time;
     var directionsButton = document.createElement("button");
     directionsButton.id = "directions-button";
-    directionsButton.innerText = "Stadium Location";
+    directionsButton.innerText = "Get Directions";
     directionsButton.value = JSON.stringify(fixture);
     mainDiv.appendChild(fixtureDiv)
     // fixtureDiv.appendChild(star)
@@ -162,6 +162,13 @@ var populateFixturesList = function(team, upcomingFixtures) {
     initialiseDirectionsButton(directionsButton);
   });
 }
+
+// var setClubTitle = function(team) {
+//   var title = document.createElement("h2");
+//   title.innerText = team.name;
+//   var header = document.getElementById("main-header");
+//   header.appendChild(title);
+// }
 
 var setClubLogo = function(team) {
   var logo = document.getElementById("club-logo");
@@ -211,6 +218,7 @@ var getSelectedTeamFixtures = function(teams) {
       });
       populateFixturesList(team, upcomingFixtures);
       setClubLogo(team);
+      // setClubTitle(team);
       setBackground(team);
     }, apitoken, apikey)
     var jsonString = JSON.stringify(team);
@@ -249,7 +257,8 @@ var getStoredTeamFixtures = function(team) {
             && fixture.matchday > 10;
     });
     populateFixturesList(team, upcomingFixtures);
-    setClubLogo(team);
+    // setClubLogo(team);
+    setClubTitle(team);
     setBackground(team);
   }, apitoken, apikey)
 }

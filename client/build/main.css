@@ -257,6 +257,7 @@ td {
 }
 
 #back-button {
+  float: left;
   max-height: 25px;
 }
 
