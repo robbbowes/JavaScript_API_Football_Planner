@@ -3,9 +3,11 @@ var displayDirections = function(routeData) {
 
   var mainDiv = document.getElementById("main-div");
   var instructionsDiv = document.createElement("div");
+  var instructionsContainer = document.createElement("div");
+  instructionsContainer.id = "instructions-container";
   instructionsDiv.id = "instructions-div";
-  mainDiv.appendChild(instructionsDiv);
-
+  mainDiv.appendChild(instructionsContainer);
+  instructionsContainer.appendChild(instructionsDiv);
   console.log(instructionsDiv);
 
   var awayAddress = routeData.routes[0].legs[0].end_address;

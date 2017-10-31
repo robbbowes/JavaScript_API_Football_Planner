@@ -63,6 +63,12 @@ header {
   margin-left: 0px;
 }
 
+#instructions-container {
+  height: 600px;
+  width: 600px;
+  padding: 10px;
+}
+
 #table-div {
   flex-shrink: 0;
   flex-grow: 1;
@@ -96,8 +102,10 @@ header {
 #instructions-div {
   flex-shrink: 0;
   order: 4;
-  background-color: tomato;
+  background-color: #dddddd;
   list-style: none;
+  overflow: auto;
+  height: 550px;
 }
 
 #previous-fixtures-list {
@@ -308,8 +316,8 @@ td {
   }
 
   #main-map {
-    height: 420px;
-    width: 300px;
+    height: 300px;
+    width: 200px;
   }
 
   #team-dropdown {
