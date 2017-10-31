@@ -3,6 +3,7 @@ db.dropDatabase()
 db.teams.insert([
   {
     name: "AFC Bournemouth",
+    stadiumName: "Dean Court",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2014/08/AFC-Bournemouth-dean-court.jpg",
     latLng: [
       50.7352306,
@@ -12,6 +13,7 @@ db.teams.insert([
   },
   {
     name: "Arsenal FC",
+    stadiumName: "Emirates Stadium",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2014/08/arsenal-emirates-stadium-aerial.jpg",
     latLng: [
       51.5548885,
@@ -21,6 +23,7 @@ db.teams.insert([
   },
   {
     name: "Brighton & Hove Albion",
+    stadiumName: "Falmer Stadium",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/amex-stadium-cover.jpg",
     latLng: [
       50.8615651,
@@ -30,6 +33,7 @@ db.teams.insert([
   },
   {
     name: "Burnley FC",
+    stadiumName: "Turf Moor",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/turf-moor-cover.jpg",
     latLng: [
       53.7890244,
@@ -39,6 +43,7 @@ db.teams.insert([
   },
   {
     name: "Chelsea FC",
+    stadiumName: "Stamford Bridge",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/stamford-bridge-cover.jpg",
     latLng: [
       51.481663,
@@ -48,6 +53,7 @@ db.teams.insert([
   },
   {
     name: "Crystal Palace FC",
+    stadiumName: "Selhurst Park",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/selhurst-park-cover.jpg",
     latLng: [
       51.3983261,
@@ -57,6 +63,7 @@ db.teams.insert([
   },
   {
     name: "Everton FC",
+    stadiumName: "Goodison Park",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/goodison-park-cover.jpg",
     latLng: [
       53.438787,
@@ -66,6 +73,7 @@ db.teams.insert([
   },
   {
     name: "Huddersfield Town",
+    stadiumName: "Kirklees Stadium",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2014/08/john-smiths-stadium-huddersfield.jpg",
     latLng: [
       53.6542822,
@@ -75,6 +83,7 @@ db.teams.insert([
   },
   {
     name: "Leicester City FC",
+    stadiumName: "King Power Stadium",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2014/08/leicester-king-power-stadium.jpg",
     latLng: [
       52.6203662,
@@ -84,6 +93,7 @@ db.teams.insert([
   },
   {
     name: "Liverpool FC",
+    stadiumName: "Anfield",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2014/08/anfield-stadium-guide.jpg",
     latLng: [
       53.4308294,
@@ -93,6 +103,7 @@ db.teams.insert([
   },
   {
     name: "Manchester City FC",
+    stadiumName: "Etihad Stadium",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/etihad-cover.jpg",
     latLng: [
       53.4831381,
@@ -102,6 +113,7 @@ db.teams.insert([
   },
   {
     name: "Manchester United FC",
+    stadiumName: "Old Trafford",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/old-trafford-cover.jpg",
     latLng: [
       53.4630589,
@@ -111,6 +123,7 @@ db.teams.insert([
   },
   {
     name: "Newcastle United FC",
+    stadiumName: "St. James Park",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/st-james-park-cover.jpg",
     latLng: [
       54.975556,
@@ -120,6 +133,7 @@ db.teams.insert([
   },
   {
     name: "Southampton FC",
+    stadiumName: "St Mary's Stadium",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2014/08/St.jpg",
     latLng: [
       50.9058218,
@@ -129,6 +143,7 @@ db.teams.insert([
   },
   {
     name: "Stoke City FC",
+    stadiumName: "bet365 Stadium",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/britannia-stadium-cover.jpg",
     latLng: [
       52.9881046,
@@ -138,6 +153,7 @@ db.teams.insert([
   },
   {
     name: "Swansea City FC",
+    stadiumName: "Liberty Stadium",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2014/08/liberty-stadium-guide.jpg",
     latLng: [
       51.6427499,
@@ -147,6 +163,7 @@ db.teams.insert([
   },
   {
     name: "Tottenham Hotspur FC",
+    stadiumName: "Wembley Stadium",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/white-hart-lane-cover.jpg",
     latLng: [
       51.6032123,
@@ -156,6 +173,7 @@ db.teams.insert([
   },
   {
     name: "Watford FC",
+    stadiumName: "Vicarage Road",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/vicarage-road-cover.jpg",
     latLng: [
       51.6499828,
@@ -165,6 +183,7 @@ db.teams.insert([
   },
   {
     name: "West Bromwich Albion FC",
+    stadiumName: "The Hawthorns",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2015/02/hawthorns-stadium-cover.jpg",
     latLng: [
       52.509038,
@@ -174,6 +193,7 @@ db.teams.insert([
   },
   {
     name: "West Ham United FC",
+    stadiumName: "London Stadium",
     stadiumPicture: "https://footballtripper.com/wp-content/uploads/2014/07/west-ham-olympic-stadium-cgi-render.jpg",
     latLng: [
       51.5387095,

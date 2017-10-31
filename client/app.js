@@ -52,19 +52,29 @@ var initialiseFixtureInfo = function(jsonFixture) {
   ticketForm.appendChild(input);
   input.id = "ticket-button";
 
-
-  var awayFixtureInfoDiv = document.getElementById("away-fixture-info-div");
-  awayFixtureInfoDiv.appendChild(fixtureDiv);
-  awayFixtureInfoDiv.appendChild(ticketForm);
-
-  var stadiumImg = document.createElement("img");
-
   requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
     var foundTeam = dbTeams.find(function(dbTeam) {
       return dbTeam.name === awayTeamName.innerText;
     });
     ticketForm.action = foundTeam.ticketLink;
-  })
+  });
+
+
+  var awayFixtureInfoDiv = document.getElementById("away-fixture-info-div");
+  awayFixtureInfoDiv.appendChild(fixtureDiv);
+  awayFixtureInfoDiv.appendChild(ticketForm);
+
+  // var stadiumName = document.createElement("p");
+  // requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
+  //   var foundTeam = dbTeams.find(function(dbTeam) {
+  //     console.log(dbTeam.stadiumName);
+  //     console.log(homeTeamName.innerText);
+  //     return dbTeam.name === homeTeamName.innerText;
+  //   });
+  //   stadiumName.innerText = foundTeam.stadiumName;
+  // });
+
+  var stadiumImg = document.createElement("img");
 
   requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
     var foundTeam = dbTeams.find(function(dbTeam) {
@@ -73,6 +83,8 @@ var initialiseFixtureInfo = function(jsonFixture) {
     stadiumImg.src = foundTeam.stadiumPicture;
   });
   stadiumImg.id = "stadium-image";
+
+  // awayFixtureInfoDiv.appendChild(stadiumName);
   awayFixtureInfoDiv.appendChild(stadiumImg);
 
 
