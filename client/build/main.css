@@ -55,7 +55,7 @@ header {
 
 #container {
   min-height: 100vh;
-  margin-top: 250px;
+  margin-top: 260px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -242,6 +242,10 @@ td {
   padding: 10px;
 }
 
+#back-button {
+  max-height: 25px;
+}
+
 @media (max-width: 600px) {
 
 
@@ -272,6 +276,10 @@ td {
 
   #team-dropdown-div {
     margin-top: 105px;
+  }
+
+  #main-div {
+      width: 35%
   }
 
   #table-div {

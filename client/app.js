@@ -12,6 +12,7 @@ var teamCrests = require("./helpers/crests.js");
 var initialiseBackButton = function() {
   var button = document.createElement("button");
   button.innerText = "Return to fixtures";
+  button.id = "back-button";
   var mainDiv = document.getElementById("main-div");
   mainDiv.appendChild(button);
   button.addEventListener("click", function() {

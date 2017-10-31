@@ -1,4 +1,4 @@
-var displayDirections = require("./displayDirections");
+var displayDirections = require("./display_directions");
 
 var MapWrapper = function() {
   this.googleMap = null;

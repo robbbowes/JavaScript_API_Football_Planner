@@ -1,17 +1,21 @@
 var displayDirections = function(routeData) {
   console.log(routeData);
-  var instructionsDiv = document.getElementById("instructions-div")
+
+  var mainDiv = document.getElementById("main-div");
+  var instructionsDiv = document.createElement("div");
+  instructionsDiv.id = "instructions-div";
+  mainDiv.appendChild(instructionsDiv);
+
+  console.log(instructionsDiv);
 
   var awayAddress = routeData.routes[0].legs[0].end_address;
   var timeTaken = routeData.routes[0].legs[0].duration.text;
   var distance  = routeData.routes[0].legs[0].distance.text;
-  console.log(distance);
 
 
   var displayAddress = document.createElement("li");
   var displayTime = document.createElement("li");
   var displayDistance = document.createElement("li");
-  console.log(displayAddress);
 
   displayAddress.id = "display-away-address";
   displayTime.id = "display-journey-time";
@@ -21,11 +25,24 @@ var displayDirections = function(routeData) {
   displayTime.innerText = "Estimated travel time: " + timeTaken;
   displayDistance.innerText = "Distance: " + distance;
 
-
-
   instructionsDiv.appendChild(displayAddress);
   instructionsDiv.appendChild(displayTime);
   instructionsDiv.appendChild(displayDistance);
+
+  var ol = document.createElement("ol");
+
+  routeData.routes[0].legs[0].steps.forEach(function(step) {
+    var li = document.createElement("li");
+    var instructions = document.createElement("p");
+    instructions.innerHTML = step.instructions;
+    var distance = document.createElement("p");
+    distance.innerHTML = step.distance.text;
+    li.appendChild(instructions);
+    li.appendChild(distance);
+    ol.appendChild(li);
+  });
+
+  instructionsDiv.appendChild(ol);
 
 
 }
