@@ -35,7 +35,7 @@ var populateLeagueTable = function(leagueTable) {
 
   var tbody = document.createElement("tbody");
   table.appendChild(tbody);
-  leagueTable[0].standing.forEach(function(team) {
+  leagueTable.standing.forEach(function(team) {
     var tr = document.createElement("tr");
     var rank = document.createElement("td");
     rank.innerText = team.position;
@@ -59,7 +59,7 @@ var populateLeagueTable = function(leagueTable) {
 
 
 var getLeagueTable = function() {
-  requestHelper.getRequest("http://localhost:3000/api/tableData", populateLeagueTable, apitoken, apikey)
+  requestHelper.getRequest("http://api.football-data.org/v1/competitions/445/leagueTable", populateLeagueTable, apitoken, apikey)
 }
 
 module.exports = getLeagueTable

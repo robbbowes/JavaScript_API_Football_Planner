@@ -69,10 +69,7 @@ var populatePreviousFixturesList = function(team, previousFixtures) {
 var populateFixturesList = function(team, upcomingFixtures) {
   var mainDiv = document.getElementById("main-div");
   while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
-  // var ul = document.createElement("ul");
-  // ul.id = "away-fixtures-list";
   upcomingFixtures.forEach(function(fixture) {
-    // var li = document.createElement("li");
     var fixtureDiv = document.createElement("div");
     fixtureDiv.id = "fixture-div";
     var homeTeamName = document.createElement("h5");
@@ -89,10 +86,7 @@ var populateFixturesList = function(team, upcomingFixtures) {
     directionsButton.id = "directions-button";
     directionsButton.innerText = "Stadium Location";
     directionsButton.value = fixture.homeTeamName;
-    // mainDiv.appendChild(ul);
-    // ul.appendChild(li);
     mainDiv.appendChild(fixtureDiv)
-    // li.appendChild(fixtureDiv);
     fixtureDiv.appendChild(homeTeamCrest);
     fixtureDiv.appendChild(homeTeamName);
     fixtureDiv.appendChild(date);
