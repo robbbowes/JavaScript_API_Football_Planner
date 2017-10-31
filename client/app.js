@@ -201,4 +201,5 @@ window.addEventListener("DOMContentLoaded", function() {
     savedTeam = JSON.parse(jsonString)
     getStoredTeamFixtures(savedTeam)
   }
+  getLeagueTable()
 });

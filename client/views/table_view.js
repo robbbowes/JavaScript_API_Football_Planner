@@ -4,18 +4,19 @@ var apikey = '16bf6721521f4342aca8f7c7656dff95';
 
 
 var populateLeagueTable = function(leagueTable) {
-  var select = document.getElementById("team-dropdown");
-  var selectedTeam = JSON.parse(select.value);
-  var selectedTeamName = selectedTeam.name;
-
+  console.log(leagueTable);
+  var jsonString = localStorage.getItem("team");
+  if (jsonString !== null) {
+    var selectedTeam = JSON.parse(jsonString)
+    var selectedTeamName = selectedTeam.name;
+  }
   var table = document.getElementById("league-table");
-  var tableDiv = document.getElementById("stats-div")
+  var tableDiv = document.getElementById("table-div")
   tableDiv.style.backgroundColor = 'white'
   while (table.firstChild) { table.removeChild(table.firstChild) }
   var thead = document.createElement("thead");
   var theadRow = document.createElement("tr");
   var hRank = document.createElement("tr");
-  hRank.innerText = "Rank";
   var hTeam = document.createElement("td");
   hTeam.innerText = "Team";
   var hPlayed = document.createElement("td");
@@ -34,7 +35,7 @@ var populateLeagueTable = function(leagueTable) {
 
   var tbody = document.createElement("tbody");
   table.appendChild(tbody);
-  leagueTable.standing.forEach(function(team) {
+  leagueTable[0].standing.forEach(function(team) {
     var tr = document.createElement("tr");
     var rank = document.createElement("td");
     rank.innerText = team.position;
@@ -58,7 +59,7 @@ var populateLeagueTable = function(leagueTable) {
 
 
 var getLeagueTable = function() {
-  requestHelper.getRequest("http://api.football-data.org/v1/competitions/445/leagueTable", populateLeagueTable, apitoken, apikey)
+  requestHelper.getRequest("http://localhost:3000/api/tableData", populateLeagueTable, apitoken, apikey)
 }
 
 module.exports = getLeagueTable
