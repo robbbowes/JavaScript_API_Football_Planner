@@ -23,10 +23,10 @@ var initialiseFixtureInfo = function(jsonFixture) {
   awayTeamName.innerText = fixture.awayTeamName;
   var homeTeamCrest = document.createElement("img");
   getHomeTeamCrest(homeTeamCrest, fixture);
-  homeTeamCrest.classList += "crest"
+  homeTeamCrest.classList += "fixture-crest"
   var awayTeamCrest = document.createElement("img");
   getAwayTeamCrest(awayTeamCrest, fixture);
-  awayTeamCrest.classList += "crest"
+  awayTeamCrest.classList += "fixture-crest"
   var homeDiv = document.createElement("div");
   homeDiv.appendChild(homeTeamCrest);
   homeDiv.appendChild(homeTeamName);
