@@ -305,6 +305,48 @@ p {
 	top:1px;
 }
 
+#ticket-button {
+  margin-bottom: 15px;
+  margin-right: 70px;
+  font-size: 24px;
+  -moz-box-shadow:inset 0px 1px 0px 0px #8936d1;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #8936d1;
+	box-shadow:inset 0px 1px 0px 0px #8936d1;
+	background:-moz-linear-gradient(top, #56039e 5%, #30025c 100%);
+	background:-webkit-linear-gradient(top, #56039e 5%, #30025c 100%);
+	background:-o-linear-gradient(top, #56039e 5%, #30025c 100%);
+	background:-ms-linear-gradient(top, #56039e 5%, #30025c 100%);
+	background:linear-gradient(to bottom, #56039e 5%, #30025c 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#56039e', endColorstr='#30025c',GradientType=0);
+	background-color:#56039e;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:8px;
+	border:1px solid #3d195b;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #5f1a9c;
+  margin-top: 15px;
+}
+
+#ticket-button:hover {
+	background:-moz-linear-gradient(top, #30025c 5%, #56039e 100%);
+	background:-webkit-linear-gradient(top, #30025c 5%, #56039e 100%);
+	background:-o-linear-gradient(top, #30025c 5%, #56039e 100%);
+	background:-ms-linear-gradient(top, #30025c 5%, #56039e 100%);
+	background:linear-gradient(to bottom, #30025c 5%, #56039e 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#30025c', endColorstr='#56039e',GradientType=0);
+	background-color:#30025c;
+}
+
+#ticket-button:active {
+  position:relative;
+	top:1px;
+}
+
 table {
   border-collapse: collapse;
   background-color: #dddddd;

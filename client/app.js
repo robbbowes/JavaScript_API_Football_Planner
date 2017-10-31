@@ -48,18 +48,28 @@ var initialiseFixtureInfo = function(jsonFixture) {
   var input = document.createElement("input");
   input.type = "submit";
   input.value = "Buy Tickets"
+  ticketForm.appendChild(input);
+  input.id = "ticket-button";
 
 
   var awayFixtureInfoDiv = document.getElementById("away-fixture-info-div");
   awayFixtureInfoDiv.appendChild(fixtureDiv);
+  awayFixtureInfoDiv.appendChild(ticketForm);
 
   var stadiumImg = document.createElement("img");
+
+  requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
+    var foundTeam = dbTeams.find(function(dbTeam) {
+      return dbTeam.name === awayTeamName.innerText;
+    });
+    ticketForm.action = foundTeam.ticketLink;
+  })
+
   requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
     var foundTeam = dbTeams.find(function(dbTeam) {
       return dbTeam.name === homeTeamName.innerText;
     });
     stadiumImg.src = foundTeam.stadiumPicture;
-    ticketForm.href = foundTeam.ticketLink;
   });
   stadiumImg.id = "stadium-image";
   awayFixtureInfoDiv.appendChild(stadiumImg);
