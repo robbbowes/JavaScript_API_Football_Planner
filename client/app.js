@@ -9,6 +9,12 @@ var initialiseTransitDropdown = require("./views/transit_dropdown_view.js");
 var dateTimeConverter = require("./helpers/date_time_converter.js");
 var teamCrests = require("./helpers/crests.js");
 
+var removeBackButton = function() {
+  var div = document.getElementById("team-dropdown-div");
+  var button = document.getElementById("back-button");
+  div.removeChild(button);
+}
+
 var initialiseFavouriteButton = function(jsonFixture) {
   var fixture = JSON.parse(jsonFixture);
   console.log(fixture);
@@ -27,6 +33,7 @@ var initialiseBackButton = function() {
     while (statsDiv.firstChild) { statsDiv.removeChild(statsDiv.firstChild) }
     var team = JSON.parse(localStorage.getItem("team"));
     getStoredTeamFixtures(team);
+    removeBackButton();
   });
 }
 
@@ -218,6 +225,7 @@ var getSelectedTeamFixtures = function(teams) {
       });
       populateFixturesList(team, upcomingFixtures);
       setClubLogo(team);
+      removeBackButton();
       // setClubTitle(team);
       setBackground(team);
     }, apitoken, apikey)
@@ -257,6 +265,7 @@ var getStoredTeamFixtures = function(team) {
             && fixture.matchday > 10;
     });
     populateFixturesList(team, upcomingFixtures);
+    removeBackButton();
     // setClubLogo(team);
     setClubTitle(team);
     setBackground(team);

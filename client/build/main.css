@@ -29,6 +29,7 @@ header {
 }
 
 #team-dropdown-div {
+  display: flex;
   padding-top: 10px;
   padding-bottom: 5px;
   background-color: white;
@@ -46,6 +47,7 @@ header {
 }
 
 #team-dropdown {
+  order: 2;
   display: block;
   margin: 0 auto;
   height: 40px;
@@ -263,7 +265,7 @@ td {
 }
 
 #back-button {
-  float: left;
+  order: 1;
   max-height: 40px;
   font-size: 20px;
   background-color: #dddddd;
