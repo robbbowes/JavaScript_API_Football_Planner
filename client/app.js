@@ -11,7 +11,8 @@ var teamCrests = require("./helpers/crests.js");
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
-    var mapWrapper = new MapWrapper(54.732523, -3, 5, initialiseTransitDropdown);
+    var mainDiv = document.getElementById("main-div");
+    mapWrapper.newMap(mainDiv);
     var currentPosition;
     navigator.geolocation.getCurrentPosition(function(result) {
       currentPosition = {lat: result.coords.latitude, lng: result.coords.longitude}
@@ -20,16 +21,15 @@ var initialiseDirectionsButton = function(directionsButton) {
         var foundTeam = dbTeams.find(function(dbTeam) {
           return homeTeamName === dbTeam.name;
         });
-        var endLat = foundTeam.latLng[0];
-        var endLng = foundTeam.latLng[1];
         var end = {
-          lat: endLat,
-          lng: endLng
+          lat: foundTeam.latLng[0],
+          lng: foundTeam.latLng[1]
         }
         var jsonEnd = JSON.stringify(end);
         localStorage.setItem("current-end-location", jsonEnd);
         var mode = "DRIVING"
         mapWrapper.getDirections(currentPosition, end, mode);
+        initialiseTransitDropdown(mapWrapper);
       });
     });
   });
@@ -128,7 +128,7 @@ var setBackground = function (team) {
     case "Huddersfield Town": mainDiv.className = "Huddersfield"; break;
     case "Brighton & Hove Albion": mainDiv.className = 'Brighton'; break;
     case "Stoke City FC": mainDiv.className = "Stoke"; break;
-    case "West Bromwich Albion FC": mainDiv.className += "WBA"; break;
+    case "West Bromwich Albion FC": mainDiv.className = "WBA"; break;
     case "Leicester City FC": mainDiv.className = "Leicester"; break;
     case "Crystal Palace FC": mainDiv.className = "Palace"; break;
     case "Swansea City FC": mainDiv.className = "Swansea"; break;
@@ -193,6 +193,7 @@ var getStoredTeamFixtures = function(team) {
 }
 
 window.addEventListener("DOMContentLoaded", function() {
+  mapWrapper = new MapWrapper();
   var apikey = apiIterator.getKey();
   requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey);
   var jsonString = localStorage.getItem("team");
