@@ -7,6 +7,7 @@ var MapWrapper = require('./views/map_wrapper.js');
 var getLeagueTable = require("./views/table_view.js");
 var initialiseTransitDropdown = require("./views/transit_dropdown_view.js");
 var dateTimeConverter = require("./helpers/date_time_converter.js");
+var teamCrests = require("./helpers/crests.js");
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
@@ -35,12 +36,22 @@ var initialiseDirectionsButton = function(directionsButton) {
 }
 
 var getTeamCrest = function(crestImg, fixture) {
-  var url = fixture._links.homeTeam.href;
-  var apikey = apiIterator.getKey();
-  requestHelper.getRequest(url, function(team) {
-    crestImg.src = team.crestUrl;
-  }, apitoken, apikey)
+  homeTeamName = fixture.homeTeamName;
+  teamCrests.forEach(function(team) {
+    if(team.name === homeTeamName) {
+      crestImg.src = team.url
+    }
+  })
 }
+
+// var getTeamCrest = function(crestImg, fixture) {
+//   console.log(fixture);
+//   var url = fixture._links.homeTeam.href;
+//   var apikey = apiIterator.getKey();
+//   requestHelper.getRequest(url, function(team) {
+//     crestImg.src = team.crestUrl;
+//   }, apitoken, apikey)
+// }
 
 var populatePreviousFixturesList = function(team, previousFixtures) {
   var statsDiv = document.getElementById("stats-div");
@@ -69,10 +80,7 @@ var populatePreviousFixturesList = function(team, previousFixtures) {
 var populateFixturesList = function(team, upcomingFixtures) {
   var mainDiv = document.getElementById("main-div");
   while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
-  // var ul = document.createElement("ul");
-  // ul.id = "away-fixtures-list";
   upcomingFixtures.forEach(function(fixture) {
-    // var li = document.createElement("li");
     var fixtureDiv = document.createElement("div");
     fixtureDiv.id = "fixture-div";
     var homeTeamName = document.createElement("h5");
@@ -89,16 +97,12 @@ var populateFixturesList = function(team, upcomingFixtures) {
     directionsButton.id = "directions-button";
     directionsButton.innerText = "Stadium Location";
     directionsButton.value = fixture.homeTeamName;
-    // mainDiv.appendChild(ul);
-    // ul.appendChild(li);
     mainDiv.appendChild(fixtureDiv)
-    // li.appendChild(fixtureDiv);
     fixtureDiv.appendChild(homeTeamCrest);
     fixtureDiv.appendChild(homeTeamName);
     fixtureDiv.appendChild(date);
     fixtureDiv.appendChild(time);
     fixtureDiv.appendChild(directionsButton);
-
     initialiseDirectionsButton(directionsButton);
   });
 }
@@ -142,10 +146,6 @@ var getSelectedTeamFixtures = function(teams) {
     var team = JSON.parse(select.value);
     var fixturesUrl = team._links.fixtures.href;
     requestHelper.getRequest(fixturesUrl, function(info) {
-      // var previousFixtures = info.fixtures.filter(function(fixture) {
-      //   return fixture.status === "FINISHED";
-      // });
-      // populatePreviousFixturesList(team, previousFixtures)
       var upcomingFixtures = info.fixtures.filter(function(fixture) {
         return fixture.homeTeamName !== team.name
               && fixture.status !== "FINISHED";
