@@ -12,7 +12,7 @@ var teamCrests = require("./helpers/crests.js");
 var removeBackButton = function() {
   var div = document.getElementById("team-dropdown-div");
   var button = document.getElementById("back-button");
-  div.removeChild(button);
+  if (button) div.removeChild(button);
 }
 
 var initialiseFavouriteButton = function(jsonFixture) {
@@ -266,8 +266,8 @@ var getStoredTeamFixtures = function(team) {
     });
     populateFixturesList(team, upcomingFixtures);
     removeBackButton();
-    // setClubLogo(team);
-    setClubTitle(team);
+    setClubLogo(team);
+    // setClubTitle(team);
     setBackground(team);
   }, apitoken, apikey)
 }
