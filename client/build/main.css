@@ -12,7 +12,7 @@ header {
 }
 
 * {
-  font-family: Palatino, "Palatino Linotype";
+  font-family: Helvetica;
 }
 
 #premier-league-logo {
@@ -100,16 +100,22 @@ header {
 }
 
 #instructions-div {
+  font-size: 20px;
+  padding: 10px;
   flex-shrink: 0;
   order: 4;
   background-color: #dddddd;
   list-style: none;
   overflow: auto;
   height: 550px;
+  border: black;
+  background-color: #DDDDDD;
+  border-radius: 12px;
+  flex-wrap: wrap;
+  box-shadow: inset 0 0 5px #000000;
 }
 
 #previous-fixtures-list {
-  font-family: Helvetica;
   list-style: none;
   font-size: 20px;
   height: 750px;
@@ -156,7 +162,6 @@ header {
 #league-table {
   margin: 8px;
   position: sticky;
-  font-family: Palatino, "Palatino Linotype";
   width: 380px;
   height: 750px;
   border: black;
@@ -167,7 +172,11 @@ header {
 }
 
 #mode {
-  height: 20px;
+  margin-right: 10px;
+  max-height: 40px;
+  font-size: 20px;
+  background-color: #dddddd;
+  border-radius: 5px;
 }
 
 /*#display-journey-time {
@@ -190,7 +199,6 @@ header {
   margin-top: 7px;
   margin-bottom: 10px;
   font-size: 30px;
-  font-family: garamond;
   font-weight: bold;
 }
 
@@ -198,7 +206,6 @@ p {
   margin-top: 2px;
   margin-bottom: 2px;
   font-size: 20px;
-  font-family: georgia;
 }
 
 #directions-button {
@@ -219,7 +226,6 @@ p {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Arial;
 	font-size:13px;
 	padding:6px 24px;
 	text-decoration:none;
@@ -256,7 +262,11 @@ td {
 }
 
 #back-button {
-  max-height: 25px;
+  max-height: 40px;
+  font-size: 20px;
+  background-color: #dddddd;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 @media (max-width: 600px) {

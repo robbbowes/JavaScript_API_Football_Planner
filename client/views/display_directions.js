@@ -23,9 +23,9 @@ var displayDirections = function(routeData) {
   displayTime.id = "display-journey-time";
   displayDistance.id = "display-distance";
 
-  displayAddress.innerText = "Away Stadium address: " + awayAddress;
-  displayTime.innerText = "Estimated travel time: " + timeTaken;
-  displayDistance.innerText = "Distance: " + distance;
+  displayAddress.innerHTML = "<b>Away Stadium address:</b>  " + awayAddress;
+  displayTime.innerHTML = "<b>Estimated travel time:</b>  " + timeTaken;
+  displayDistance.innerHTML = "<b>Distance:</b>  " + distance;
 
   instructionsDiv.appendChild(displayAddress);
   instructionsDiv.appendChild(displayTime);
