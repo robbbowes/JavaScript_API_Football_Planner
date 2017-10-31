@@ -265,6 +265,7 @@ td {
 }
 
 #back-button {
+  position: absolute;
   order: 1;
   max-height: 40px;
   font-size: 20px;
