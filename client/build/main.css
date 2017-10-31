@@ -186,6 +186,7 @@ header {
 }*/
 
 .crest {
+  margin-right: -30px;
   height: 165px;
   margin-bottom: 5px;
   margin-top: 20px;
@@ -267,6 +268,11 @@ td {
   background-color: #dddddd;
   border-radius: 5px;
   padding: 5px;
+}
+
+#star {
+  height: 30px;
+  float: right;
 }
 
 @media (max-width: 600px) {
