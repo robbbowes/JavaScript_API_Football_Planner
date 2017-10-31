@@ -265,7 +265,11 @@ window.addEventListener("DOMContentLoaded", function() {
   }
   var plLogo = document.getElementById("premier-league-logo")
   plLogo.addEventListener("click", function() {
-    getStoredTeamFixtures(savedTeam);
+    var jsonString = localStorage.getItem("team");
+    if (jsonString !== null) {
+      savedTeam = JSON.parse(jsonString)
+      getStoredTeamFixtures(savedTeam)
+    }
   })
   getLeagueTable()
 });
