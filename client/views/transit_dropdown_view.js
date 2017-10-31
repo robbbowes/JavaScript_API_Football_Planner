@@ -26,9 +26,9 @@ var initialiseTransitDropdown = function(mapWrapper) {
   container.appendChild(modeSelect);
 
   modeSelect.addEventListener("change", function() {
-    var mainDiv = document.getElementById("main-div");
+    var awayFixtureInfoDiv = document.getElementById("away-fixture-info-div");
     var directionsContainer = document.getElementById("instructions-container")
-    mainDiv.removeChild(directionsContainer);
+    awayFixtureInfoDiv.removeChild(directionsContainer);
     var end = JSON.parse(localStorage.getItem("current-end-location"));
     var transitOption = document.getElementById("mode").value;
     navigator.geolocation.getCurrentPosition(function(result) {

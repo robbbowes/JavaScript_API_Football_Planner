@@ -15,9 +15,55 @@ var removeBackButton = function() {
   if (button) div.removeChild(button);
 }
 
+var initialiseFixtureInfo = function(jsonFixture) {
+  var fixture = JSON.parse(jsonFixture);
+  var homeTeamName = document.createElement("h3");
+  homeTeamName.innerText = fixture.homeTeamName;
+  var awayTeamName = document.createElement("h3");
+  awayTeamName.innerText = fixture.awayTeamName;
+  var homeTeamCrest = document.createElement("img");
+  getHomeTeamCrest(homeTeamCrest, fixture);
+  homeTeamCrest.classList += "crest"
+  var awayTeamCrest = document.createElement("img");
+  getAwayTeamCrest(awayTeamCrest, fixture);
+  awayTeamCrest.classList += "crest"
+  var homeDiv = document.createElement("div");
+  homeDiv.appendChild(homeTeamCrest);
+  homeDiv.appendChild(homeTeamName);
+  homeDiv.id = "home-div";
+  var awayDiv = document.createElement("div");
+  awayDiv.appendChild(awayTeamCrest);
+  awayDiv.appendChild(awayTeamName);
+  awayDiv.id = "away-div";
+  var fixtureDiv = document.createElement("div");
+  var vs = document.createElement("p");
+  vs.id = "vs";
+  vs.innerText = "vs";
+  fixtureDiv.appendChild(homeDiv);
+  fixtureDiv.appendChild(vs);
+  fixtureDiv.appendChild(awayDiv);
+  fixtureDiv.id = "away-fixture-team-div";
+
+  var awayFixtureInfoDiv = document.getElementById("away-fixture-info-div");
+  awayFixtureInfoDiv.appendChild(fixtureDiv);
+
+  var stadiumImg = document.createElement("img");
+  requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
+    var foundTeam = dbTeams.find(function(dbTeam) {
+      console.log(dbTeam.name);
+      console.log(homeTeamName);
+      return dbTeam.name === homeTeamName.innerText;
+    });
+    stadiumImg.src = foundTeam.stadiumPicture;
+  });
+  stadiumImg.id = "stadium-image";
+  awayFixtureInfoDiv.appendChild(stadiumImg);
+
+
+}
+
 var initialiseFavouriteButton = function(jsonFixture) {
   var fixture = JSON.parse(jsonFixture);
-  console.log(fixture);
 }
 
 var initialiseBackButton = function() {
@@ -41,13 +87,15 @@ var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
     var mainDiv = document.getElementById("main-div");
     while (mainDiv.firstChild) { mainDiv.removeChild(mainDiv.firstChild) }
+    var awayFixtureInfoDiv = document.createElement("div");
+    awayFixtureInfoDiv.id = "away-fixture-info-div";
+    mainDiv.appendChild(awayFixtureInfoDiv);
     var statsDiv = document.getElementById("stats-div");
     mapWrapper.newMap(statsDiv);
     var currentPosition;
     navigator.geolocation.getCurrentPosition(function(result) {
       currentPosition = {lat: result.coords.latitude, lng: result.coords.longitude}
       var homeTeamName = JSON.parse(directionsButton.value).homeTeamName;
-      console.log(homeTeamName);
       requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
         var foundTeam = dbTeams.find(function(dbTeam) {
           return homeTeamName === dbTeam.name;
@@ -60,6 +108,7 @@ var initialiseDirectionsButton = function(directionsButton) {
         localStorage.setItem("current-end-location", jsonEnd);
         var mode = "DRIVING"
         mapWrapper.getDirections(currentPosition, end, mode);
+        initialiseFixtureInfo(directionsButton.value)
         initialiseFavouriteButton(directionsButton.value)
         initialiseTransitDropdown(mapWrapper);
         initialiseBackButton();
@@ -68,7 +117,7 @@ var initialiseDirectionsButton = function(directionsButton) {
   });
 }
 
-var getTeamCrest = function(crestImg, fixture) {
+var getHomeTeamCrest = function(crestImg, fixture) {
   homeTeamName = fixture.homeTeamName;
   teamCrests.forEach(function(team) {
     if(team.name === homeTeamName) {
@@ -77,14 +126,13 @@ var getTeamCrest = function(crestImg, fixture) {
   })
 }
 
-// var getTeamCrest = function(crestImg, fixture) {
-//   console.log(fixture);
-//   var url = fixture._links.homeTeam.href;
-//   var apikey = apiIterator.getKey();
-//   requestHelper.getRequest(url, function(team) {
-//     crestImg.src = team.crestUrl;
-//   }, apitoken, apikey)
-// }
+var getAwayTeamCrest = function(crestImg, fixture) {
+  awayTeamName = fixture.awayTeamName;
+  var team = teamCrests.find(function(team) {
+    return team.name === awayTeamName
+  });
+  crestImg.src = team.url;
+}
 
 var populatePreviousFixturesList = function(team, previousFixtures) {
   var statsDiv = document.getElementById("stats-div");
@@ -150,7 +198,7 @@ var populateFixturesList = function(team, upcomingFixtures) {
     // console.log(star.selected);
     var homeTeamCrest = document.createElement("img");
     homeTeamCrest.classList += "crest";
-    getTeamCrest(homeTeamCrest, fixture);
+    getHomeTeamCrest(homeTeamCrest, fixture);
     var date = document.createElement("p");
     date.innerText = dateTimeConverter(fixture.date).date;
     var time = document.createElement("p");

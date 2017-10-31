@@ -1,12 +1,12 @@
 var displayDirections = function(routeData) {
   console.log(routeData);
 
-  var mainDiv = document.getElementById("main-div");
+  var awayFixtureInfoDiv = document.getElementById("away-fixture-info-div");
   var instructionsDiv = document.createElement("div");
   var instructionsContainer = document.createElement("div");
   instructionsContainer.id = "instructions-container";
   instructionsDiv.id = "instructions-div";
-  mainDiv.appendChild(instructionsContainer);
+  awayFixtureInfoDiv.appendChild(instructionsContainer);
   instructionsContainer.appendChild(instructionsDiv);
   console.log(instructionsDiv);
 

@@ -156,6 +156,46 @@ header {
   box-shadow: inset 0 0 10px #000000;
 }
 
+#away-fixture-info-div {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  /*height: inherit;
+  width: inherit;*/
+}
+
+#away-fixture-team-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+#home-div {
+  float: left;
+  padding-left: 10px;
+}
+
+#away-div {
+  float: right;
+}
+
+#stadium-image {
+  width: 600px;
+}
+
+#vs {
+  bottom: 0;
+  vertical-align: bottom;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 16px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 /*#home-team-name {
   padding: 0;
   margin: 0;
@@ -175,7 +215,7 @@ header {
 
 #transit-div {
   display: flex;
-  
+
 }
 
 #mode {
