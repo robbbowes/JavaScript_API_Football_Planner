@@ -70,7 +70,7 @@ var initialiseFixtureInfo = function(jsonFixture) {
   var awayFixtureInfoDiv = document.getElementById("away-fixture-info-div");
   awayFixtureInfoDiv.appendChild(fixtureDiv);
   awayFixtureInfoDiv.appendChild(ticketForm);
-  awayFixtureInfoDiv.appendChild(star);
+  fixtureDiv.appendChild(star);
 
   var stadiumName = document.createElement("p");
   stadiumName.id = "stadium-name";
@@ -139,18 +139,21 @@ var initialiseFavouritesButton = function() {
 
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
-    var mainDiv = document.getElementById("main-div");
-    // var loadingDiv = document.createElement("div");
-    // var loadingImg = document.createElement("img");
-    // loadingDiv.appendChild(loadingImg);
-    // loadingDiv.id = "loader"
-    // mainDiv.appendChild(loadingDiv);
-    // console.log("loader added: "+loadingDiv);
-    // loadingImg.src = "https://cdn.dribbble.com/users/494229/screenshots/1601132/loadingicon14.gif"
+    var container = document.getElementById("container");
+    // var table = document.getElementById("table-div");
+    var loadingDiv = document.createElement("div");
+    loadingDiv.id = "loading-div"
+    var loadingImg = document.createElement("img");
+    document.body.appendChild(loadingImg);
+    loadingImg.id = "loading-image"
+    container.appendChild(loadingDiv);
+    loadingImg.src = "https://cdn.dribbble.com/users/494229/screenshots/1601132/loadingicon14.gif"
     clearHTML("main-div");
     var awayFixtureInfoDiv = document.createElement("div");
     awayFixtureInfoDiv.id = "away-fixture-info-div";
+    var mainDiv = document.getElementById("main-div")
     mainDiv.appendChild(awayFixtureInfoDiv);
+    // table.id = "hidden"
     var statsDiv = document.getElementById("stats-div");
     mapWrapper.newMap(statsDiv);
     var currentPosition;
@@ -322,6 +325,12 @@ var setBackground = function (team) {
   }
 }
 
+var removeIntroText = function() {
+  var mainDiv = document.getElementById("main-div");
+  var introDiv = document.getElementById("intro-div");
+  if (introDiv) mainDiv.removeChild(introDiv);
+}
+
 var getSelectedTeamFixtures = function(teams) {
   var select = document.querySelector("#team-dropdown");
   select.addEventListener("change", function() {
@@ -339,7 +348,7 @@ var getSelectedTeamFixtures = function(teams) {
       populateFixturesList(team, upcomingFixtures);
       setClubLogo(team);
       removeBackButton();
-      // setClubTitle(team);
+      removeIntroText();
       setBackground(team);
     }, apitoken, apikey)
     var jsonString = JSON.stringify(team);
@@ -353,12 +362,12 @@ var createIntroText = function() {
   var introDiv = document.createElement("div");
   introDiv.id = "intro-div";
   var introHeading = document.createElement("h3");
-  introHeading.innerHTML = "Support your team, home and away."
+  introHeading.innerHTML = "Let us help you support your team away."
   introHeading.id = "intro-heading"
   var introText = document.createElement("p");
-  introText.innerHTML = "The Premier League Away Day Planner allows you to follow your favourite team across the country."+
+  introText.innerHTML = "Haway Days allows you to follow your favourite team around the country."+
   "<br><br>You can find out your information about your team's upcoming fixtures, and plan your route to the next big match."+
-  "<br><br>To use the Away Day Planner, just select your favourite team, browse the list of fixtures, and select from a range"+
+  "<br><br>To use the Haway Days app, just select your favourite team, browse the list of fixtures, and select from a range"+
   " of travel options. You can also save a fixture and come back to it later.";
   introText.id = "intro-text";
   introDiv.appendChild(introHeading);
@@ -405,6 +414,7 @@ var getStoredTeamFixtures = function(team) {
 }
 
 window.addEventListener("DOMContentLoaded", function() {
+  // document.body.style.zoom = "60%"
   mapWrapper = new MapWrapper();
   var apikey = apiIterator.getKey();
   requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey);
