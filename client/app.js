@@ -225,26 +225,9 @@ var initialiseStar = function(fixture) {
     if (!star.selected) {
       star.src = "http://images.clipartpanda.com/star-clipart-black-and-white-RTG7BpqTL.png";
       var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
-      // var newFavouriteFixtures = favouriteFixtures.forEach(function(localStorageFixture, index) {
-      //   if (fixture.homeTeamName !== localStorageFixture.homeTeamName
-      //         && fixture.awayTeamName !== localStorageFixture.awayTeamName) {
-      //           favouriteFixtures.splice(index, 1);
-      //         }
-      // });
       var newFavouriteFixtures = favouriteFixtures.filter(function(localStorageFixture) {
-        // console.log("fixture: ");
-        // console.log(fixture.awayTeamName);
-        // console.log(localStorageFixture.awayTeamName);
-        console.log(fixture.awayTeamName,"fixture");
-        console.log(localStorageFixture.awayTeamName, "localStorageFixture" );
-
-
         return fixture.homeTeamName != localStorageFixture.homeTeamName
-
-
-
       });
-      console.log(newFavouriteFixtures);
       localStorage.setItem("favouriteFixtures", JSON.stringify(newFavouriteFixtures));
     }
   });

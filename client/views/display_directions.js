@@ -1,5 +1,4 @@
 var displayDirections = function(routeData) {
-  console.log(routeData);
 
   var awayFixtureInfoDiv = document.getElementById("away-fixture-info-div");
   var instructionsDiv = document.createElement("div");
@@ -8,7 +7,6 @@ var displayDirections = function(routeData) {
   instructionsDiv.id = "instructions-div";
   awayFixtureInfoDiv.appendChild(instructionsContainer);
   instructionsContainer.appendChild(instructionsDiv);
-  console.log(instructionsDiv);
 
   var awayAddress = routeData.routes[0].legs[0].end_address;
   var timeTaken = routeData.routes[0].legs[0].duration.text;
