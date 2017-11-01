@@ -64,15 +64,16 @@ var initialiseFixtureInfo = function(jsonFixture) {
   awayFixtureInfoDiv.appendChild(fixtureDiv);
   awayFixtureInfoDiv.appendChild(ticketForm);
 
-  // var stadiumName = document.createElement("p");
-  // requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
-  //   var foundTeam = dbTeams.find(function(dbTeam) {
-  //     console.log(dbTeam.stadiumName);
-  //     console.log(homeTeamName.innerText);
-  //     return dbTeam.name === homeTeamName.innerText;
-  //   });
-  //   stadiumName.innerText = foundTeam.stadiumName;
-  // });
+  var stadiumName = document.createElement("p");
+  stadiumName.id = "stadium-name";
+  requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
+    var foundTeam = dbTeams.find(function(dbTeam) {
+      console.log(dbTeam.stadiumName);
+      console.log(homeTeamName.innerText);
+      return dbTeam.name === homeTeamName.innerText;
+    });
+    stadiumName.innerText = foundTeam.stadiumName;
+  });
 
   var stadiumImg = document.createElement("img");
 
@@ -84,7 +85,7 @@ var initialiseFixtureInfo = function(jsonFixture) {
   });
   stadiumImg.id = "stadium-image";
 
-  // awayFixtureInfoDiv.appendChild(stadiumName);
+  awayFixtureInfoDiv.appendChild(stadiumName);
   awayFixtureInfoDiv.appendChild(stadiumImg);
 
 
@@ -195,8 +196,9 @@ var populatePreviousFixturesList = function(team, previousFixtures) {
 
 var initialiseStar = function(fixture) {
   var star = fixture.star;
+  //check if fixture is in localStorage; if so, set star to blue; if not, white.
   star.addEventListener("click", function() {
-    star.selected = !star.selected;
+    star.selected = !star.selected
     if (star.selected) {
       star.src = "https://thecliparts.com/wp-content/uploads/2017/04/dark-blue-star-clipart.png";
       var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
