@@ -391,6 +391,7 @@ var populateDropdown = function(information) {
   getSelectedTeamFixtures(teams);
 }
 
+
 var getStoredTeamFixtures = function(team) {
   var statsDiv = document.getElementById("stats-div");
   clearHTML("stats-div");
