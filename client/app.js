@@ -1,14 +1,20 @@
-var requestHelper = require('./helpers/request_helper.js');
 var teamsUrl = 'http://api.football-data.org/v1/competitions/445/teams';
 var apitoken = 'X-Auth-Token';
+
 var ApiIterator = require("./helpers/api_iterator.js");
-var apiIterator = new ApiIterator();
-var MapWrapper = require('./views/map_wrapper.js');
-var getLeagueTable = require("./views/table_view.js");
-var initialiseTransitDropdown = require("./views/transit_dropdown_view.js");
-var dateTimeConverter = require("./helpers/date_time_converter.js");
-var teamCrests = require("./helpers/crests.js");
 var clearHTML = require("./helpers/clearHTML.js")
+var dateTimeConverter = require("./helpers/date_time_converter.js");
+var requestHelper = require('./helpers/request_helper.js');
+var setBackground = require("./helpers/set_background.js");
+var teamCrests = require("./helpers/crests.js");
+
+var createIntroText = require("./views/create_intro_text");
+var getLeagueTable = require("./views/table_view.js");
+var initialiseStar = require("./views/initialise_star");
+var initialiseTransitDropdown = require("./views/transit_dropdown_view.js");
+var MapWrapper = require('./views/map_wrapper.js');
+
+var apiIterator = new ApiIterator();
 
 var removeBackButton = function() {
   var div = document.getElementById("team-dropdown-div");
@@ -24,10 +30,10 @@ var initialiseFixtureInfo = function(jsonFixture) {
   awayTeamName.innerText = fixture.awayTeamName;
   var homeTeamCrest = document.createElement("img");
   getHomeTeamCrest(homeTeamCrest, fixture);
-  homeTeamCrest.classList += "fixture-crest"
+  homeTeamCrest.classList += "fixture-crest";
   var awayTeamCrest = document.createElement("img");
   getAwayTeamCrest(awayTeamCrest, fixture);
-  awayTeamCrest.classList += "fixture-crest"
+  awayTeamCrest.classList += "fixture-crest";
   var homeDiv = document.createElement("div");
   homeDiv.appendChild(homeTeamCrest);
   homeDiv.appendChild(homeTeamName);
@@ -65,8 +71,6 @@ var initialiseFixtureInfo = function(jsonFixture) {
   star.id = "star"
   initialiseStar(fixture);
 
-
-
   var awayFixtureInfoDiv = document.getElementById("away-fixture-info-div");
   awayFixtureInfoDiv.appendChild(fixtureDiv);
   awayFixtureInfoDiv.appendChild(ticketForm);
@@ -93,8 +97,6 @@ var initialiseFixtureInfo = function(jsonFixture) {
 
   awayFixtureInfoDiv.appendChild(stadiumName);
   awayFixtureInfoDiv.appendChild(stadiumImg);
-
-
 }
 
 var initialiseFavouriteButton = function(jsonFixture) {
@@ -222,41 +224,6 @@ var populatePreviousFixturesList = function(team, previousFixtures) {
   })
 }
 
-var initialiseStar = function(fixture) {
-  var star = fixture.star;
-  var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
-  var foundFixture = favouriteFixtures.find(function(localStorageFixture) {
-    return fixture.homeTeamName === localStorageFixture.homeTeamName
-          && fixture.awayTeamName === localStorageFixture.awayTeamName;
-  });
-  if (foundFixture) {
-    star.src = "https://thecliparts.com/wp-content/uploads/2017/04/dark-blue-star-clipart.png";
-    star.selected = true;
-  }
-  if (!foundFixture) {
-    star.src = "http://images.clipartpanda.com/star-clipart-black-and-white-RTG7BpqTL.png";
-    star.selected = false;
-  }
-
-  star.addEventListener("click", function() {
-    star.selected = !star.selected
-    if (star.selected) {
-      star.src = "https://thecliparts.com/wp-content/uploads/2017/04/dark-blue-star-clipart.png";
-      var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
-      favouriteFixtures.push(fixture);
-      localStorage.setItem("favouriteFixtures", JSON.stringify(favouriteFixtures));
-    }
-    if (!star.selected) {
-      star.src = "http://images.clipartpanda.com/star-clipart-black-and-white-RTG7BpqTL.png";
-      var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
-      var newFavouriteFixtures = favouriteFixtures.filter(function(localStorageFixture) {
-        return fixture.homeTeamName != localStorageFixture.homeTeamName
-      });
-      localStorage.setItem("favouriteFixtures", JSON.stringify(newFavouriteFixtures));
-    }
-  });
-}
-
 var populateFixturesList = function(team, upcomingFixtures) {
   var mainDiv = document.getElementById("main-div");
   clearHTML("main-div");
@@ -292,37 +259,9 @@ var populateFixturesList = function(team, upcomingFixtures) {
   });
 }
 
-
 var setClubLogo = function(team) {
   var logo = document.getElementById("club-logo");
   logo.src = team.crestUrl;
-}
-
-var setBackground = function (team) {
-  var mainDiv = document.getElementById("main-header");
-  switch(team.name) {
-    case "Newcastle United FC": mainDiv.className = "Newcastle"; break;
-    case "Manchester City FC": mainDiv.className = "ManCity"; break;
-    case "Manchester United FC": mainDiv.className = "ManUtd"; break;
-    case "Tottenham Hotspur": mainDiv.className = "Tottenham"; break;
-    case "Chelsea FC": mainDiv.className = "Chelsea"; break;
-    case "Arsenal FC": mainDiv.className = "Arsenal"; break;
-    case "Liverpool FC": mainDiv.className = "Liverpool"; break;
-    case "Watford FC": mainDiv.className = "Watford"; break;
-    case "Burnley FC": mainDiv.className = "Burnley"; break;
-    case "Southampton FC": mainDiv.className = "Southampton"; break;
-    case "Huddersfield Town": mainDiv.className = "Huddersfield"; break;
-    case "Brighton & Hove Albion": mainDiv.className = 'Brighton'; break;
-    case "Stoke City FC": mainDiv.className = "Stoke"; break;
-    case "West Bromwich Albion FC": mainDiv.className = "WBA"; break;
-    case "Leicester City FC": mainDiv.className = "Leicester"; break;
-    case "Crystal Palace FC": mainDiv.className = "Palace"; break;
-    case "Swansea City FC": mainDiv.className = "Swansea"; break;
-    case "Everton FC": mainDiv.className = "Everton"; break;
-    case "AFC Bournemouth": mainDiv.className = "Bournemouth"; break;
-    case "West Ham United FC": mainDiv.className = "WHAM"; break;
-    default: mainDiv.className = "Swansea";
-  }
 }
 
 var removeIntroText = function() {
@@ -355,24 +294,6 @@ var getSelectedTeamFixtures = function(teams) {
     localStorage.setItem("team", jsonString);
     getLeagueTable();
   })
-}
-
-var createIntroText = function() {
-  var mainDiv = document.getElementById("main-div");
-  var introDiv = document.createElement("div");
-  introDiv.id = "intro-div";
-  var introHeading = document.createElement("h3");
-  introHeading.innerHTML = "Let us help you support your team away."
-  introHeading.id = "intro-heading"
-  var introText = document.createElement("p");
-  introText.innerHTML = "Haway Days allows you to follow your favourite team around the country."+
-  "<br><br>You can find out your information about your team's upcoming fixtures, and plan your route to the next big match."+
-  "<br><br>To use the Haway Days app, just select your favourite team, browse the list of fixtures, and select from a range"+
-  " of travel options. You can also save a fixture and come back to it later.";
-  introText.id = "intro-text";
-  introDiv.appendChild(introHeading);
-  introDiv.appendChild(introText);
-  mainDiv.appendChild(introDiv);
 }
 
 var populateDropdown = function(information) {
