@@ -247,7 +247,8 @@ header {
 
 #stadium-name {
   font-family: georgia;
-  font-size: 30px;
+  font-size: 22px;
+  margin-right: 70px;
 }
 
 #stadium-image {
@@ -310,7 +311,7 @@ header {
 #home-team-name {
   margin-top: 7px;
   margin-bottom: 10px;
-  font-size: 30px;
+  font-size: 28px;
   font-family: georgia;
   font-weight: bold;
 }
@@ -349,6 +350,7 @@ p {
   font-size:13px;
   padding:6px 24px;
   margin-top: 15px;
+  margin-right: 70px;
 }
 
 #ticket-button:active {
@@ -391,8 +393,9 @@ td {
 }
 
 #loading-image {
+  margin-top: -200px;
   width: 100vw;
-  height: 100vh;
+  height: 1300px;
   position: absolute;
   top: 0;
   left: 0;

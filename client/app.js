@@ -420,6 +420,7 @@ var getStoredTeamFixtures = function(team) {
 }
 
 window.addEventListener("DOMContentLoaded", function() {
+  // document.body.style.zoom = "60%"
   mapWrapper = new MapWrapper();
   var apikey = apiIterator.getKey();
   requestHelper.getRequest(teamsUrl, populateDropdown, apitoken, apikey);
