@@ -530,4 +530,8 @@ td {
     width: 250px;
     font-size: 15px;
   }
+
+  #app-name {
+    font-size: 40px;
+  }
 }
