@@ -33,6 +33,7 @@ header {
 
 #team-dropdown-div {
   display: flex;
+  flex-direction: row;
   padding-top: 10px;
   padding-bottom: 5px;
   background-color: white;
@@ -45,8 +46,15 @@ header {
   z-index:1000;
 }
 
-#floating-panel {
-  z-index: 1000;
+#back-button {
+  margin-left: 25px;
+  position: absolute;
+  order: 1;
+  max-height: 40px;
+  font-size: 20px;
+  background-color: #dddddd;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 #team-dropdown {
@@ -56,6 +64,22 @@ header {
   height: 40px;
   width: 300px;
   font-size: 20px;
+}
+
+#favourites-button {
+  right: 0;
+  margin-right: 128px;
+  position: absolute;
+  order: 3;
+  max-height: 40px;
+  font-size: 20px;
+  background-color: #dddddd;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#floating-panel {
+  z-index: 1000;
 }
 
 #container {
@@ -92,6 +116,7 @@ header {
 }
 
 #main-div {
+  height: 100%;
   order: 2;
   flex: 4 1 auto;
   display: flex;
@@ -357,23 +382,13 @@ td {
   padding: 10px;
 }
 
-#back-button {
-  margin-left: 25px;
-  position: absolute;
-  order: 1;
-  max-height: 40px;
-  font-size: 20px;
-  background-color: #dddddd;
-  border-radius: 5px;
-  padding: 5px;
-}
-
 #loader {
   z-index: 3;
 }
 
 #star {
   height: 30px;
+  width: 30px;;
   float: right;
 }
 

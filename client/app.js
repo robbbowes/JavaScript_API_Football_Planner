@@ -59,17 +59,23 @@ var initialiseFixtureInfo = function(jsonFixture) {
     ticketForm.action = foundTeam.ticketLink;
   });
 
+  var star = document.createElement("img");
+  star.selected = fixture.star.selected;
+  fixture.star = star;
+  star.id = "star"
+  initialiseStar(fixture);
+
+
 
   var awayFixtureInfoDiv = document.getElementById("away-fixture-info-div");
   awayFixtureInfoDiv.appendChild(fixtureDiv);
   awayFixtureInfoDiv.appendChild(ticketForm);
+  awayFixtureInfoDiv.appendChild(star);
 
   var stadiumName = document.createElement("p");
   stadiumName.id = "stadium-name";
   requestHelper.getRequest("http://localhost:3000/api/clubExtras", function(dbTeams) {
     var foundTeam = dbTeams.find(function(dbTeam) {
-      console.log(dbTeam.stadiumName);
-      console.log(homeTeamName.innerText);
       return dbTeam.name === homeTeamName.innerText;
     });
     stadiumName.innerText = foundTeam.stadiumName;
@@ -112,6 +118,25 @@ var initialiseBackButton = function() {
   });
 }
 
+var initialiseFavouritesButton = function() {
+  var button = document.createElement("button");
+  button.innerText = "Favourites";
+  button.id = "favourites-button";
+  var header = document.getElementById("team-dropdown-div");
+  var previousButton = document.getElementById("favourites-button");
+  if (previousButton) header.removeChild(previousButton);
+  header.appendChild(button);
+  button.addEventListener("click", function() {
+    var mainDiv = document.getElementById("main-div");
+    clearHTML("main-div");
+    var statsDiv = document.getElementById("stats-div");
+    clearHTML("stats-div");
+    removeBackButton();
+    var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
+    populateFixturesList(null, favouriteFixtures);
+  })
+}
+
 var initialiseDirectionsButton = function(directionsButton) {
   directionsButton.addEventListener("click", function() {
     var mainDiv = document.getElementById("main-div");
@@ -144,10 +169,10 @@ var initialiseDirectionsButton = function(directionsButton) {
         localStorage.setItem("current-end-location", jsonEnd);
         var mode = "DRIVING"
         mapWrapper.getDirections(currentPosition, end, mode);
-        initialiseFixtureInfo(directionsButton.value)
-        initialiseFavouriteButton(directionsButton.value)
+        initialiseFixtureInfo(directionsButton.value);
         initialiseTransitDropdown(mapWrapper);
         initialiseBackButton();
+        initialiseFavouritesButton();
       });
     });
   });
@@ -197,10 +222,6 @@ var populatePreviousFixturesList = function(team, previousFixtures) {
 var initialiseStar = function(fixture) {
   var star = fixture.star;
   var favouriteFixtures = JSON.parse(localStorage.getItem("favouriteFixtures")) || [];
-  // console.log(favouriteFixtures);
-  // console.log(fixture);
-  // var isFavourite = favouriteFixtures.includes(fixture);
-  // console.log(isFavourite);
   var foundFixture = favouriteFixtures.find(function(localStorageFixture) {
     return fixture.homeTeamName === localStorageFixture.homeTeamName
           && fixture.awayTeamName === localStorageFixture.awayTeamName;
@@ -258,7 +279,7 @@ var populateFixturesList = function(team, upcomingFixtures) {
     directionsButton.innerText = "Get Directions";
     directionsButton.value = JSON.stringify(fixture);
     mainDiv.appendChild(fixtureDiv)
-      fixtureDiv.appendChild(star)
+    fixtureDiv.appendChild(star)
     fixtureDiv.appendChild(homeTeamCrest);
     fixtureDiv.appendChild(homeTeamName);
     fixtureDiv.appendChild(date);
@@ -406,4 +427,5 @@ window.addEventListener("DOMContentLoaded", function() {
     }
   })
   getLeagueTable()
+  initialiseFavouritesButton();
 });
