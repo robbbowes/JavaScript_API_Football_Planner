@@ -370,6 +370,10 @@ td {
   padding: 10px;
 }
 
+h3 {
+  font-family: georgia;
+}
+
 #loader {
   z-index: 3;
 }
