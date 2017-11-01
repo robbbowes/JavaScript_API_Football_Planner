@@ -240,6 +240,10 @@ header {
   float: right;
 }
 
+#stadium-name {
+
+}
+
 #stadium-image {
   width: 600px;
   border-radius: 12px;
@@ -300,6 +304,7 @@ header {
   margin-top: 7px;
   margin-bottom: 10px;
   font-size: 30px;
+  font-family: georgia;
   font-weight: bold;
 }
 
