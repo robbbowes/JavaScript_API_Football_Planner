@@ -289,12 +289,6 @@ var populateFixturesList = function(team, upcomingFixtures) {
   });
 }
 
-// var setClubTitle = function(team) {
-//   var title = document.createElement("h2");
-//   title.innerText = team.name;
-//   var header = document.getElementById("main-header");
-//   header.appendChild(title);
-// }
 
 var setClubLogo = function(team) {
   var logo = document.getElementById("club-logo");
