@@ -470,6 +470,14 @@ td {
     height: 30px;
   }
 
+  .crest {
+    height: 135px;
+  }
+
+  #home-team-name {
+      font-size: 20px;
+  }
+
   #away-fixture-info-div {
     margin-top: 20px;
   }
@@ -503,6 +511,16 @@ td {
     max-width: 300px;
   }
 
+  #fixture-div {
+    width: 250px;
+    height: 300px;
+  }
+
+  #star {
+    height: 20px;
+    width: 20px;
+  }
+
   #previous-fixtures-list {
     position: relative;
     font-size: 18px;
@@ -533,5 +551,6 @@ td {
 
   #app-name {
     font-size: 40px;
+    margin-top: 35px;
   }
 }
