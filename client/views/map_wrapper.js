@@ -15,9 +15,10 @@ MapWrapper.prototype = {
     this.directionsRenderer.setMap(null);
     while (div.firstChild) { div.removeChild(div.firstChild) }
     var mapDiv = document.createElement("div");
-    mapDiv.id = "main-map";
+    mapDiv.id = "main-map"
     div.appendChild(mapDiv);
     this.googleMap = new google.maps.Map(mapDiv, center, zoom);
+    this.googleMap.backgroundColor = "white";
   },
 
   geolocate: function() {
@@ -32,10 +33,17 @@ MapWrapper.prototype = {
       travelMode: mode
     }
     this.directionsService.route(request, function(result, status) {
-      // var mainDiv = document.getElementById("main-div");
-      // var loadingDiv = document.getElementById("loader");
-      // console.log("loadingDiv" + loadingDiv);
-      // mainDiv.removeChild(loadingDiv);
+
+      // var table = document.getElementById("hidden")
+
+      var container = document.getElementById("container");
+      var loadingImg = document.getElementById("loading-image");
+      if (loadingImg) document.body.removeChild(loadingImg);
+
+      // if (table) table.id = "table-div"
+
+
+
       this.directionsRenderer.setDirections(result);
       displayDirections(result)
     }.bind(this));
