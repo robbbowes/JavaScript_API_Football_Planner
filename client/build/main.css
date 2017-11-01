@@ -76,12 +76,10 @@ header {
 #intro-text {
   font-size: 28px;
   color: #3D1C5A;
-
 }
 
 #instructions-container {
-  margin-right: 50px;
-  width: 620px;
+  width: 600px;
   padding: 10px;
 }
 
@@ -91,13 +89,10 @@ header {
   order: 3;
   background-color: white;
   height: 100vh;
-  overflow: scroll;
 }
 
 #main-div {
-  /*flex-basis: auto;*/
   order: 2;
-  /*flex-grow: 4;*/
   flex: 4 1 auto;
   display: flex;
   justify-content: center;
@@ -143,12 +138,8 @@ header {
 }
 
 #main-map {
-  margin-bottom: 10px;
-  border-radius: 12px;
   width: 420px;
   height: 750px;
-  /*height: 620px;
-  width: 450px;*/
   margin-left: 20px;
 }
 
@@ -185,10 +176,6 @@ header {
   width: inherit;*/
 }
 
-#stadium-name {
-  margin-right: 70px;
-}
-
 #away-fixture-team-div {
   margin-right: 70px;
   display: flex;
@@ -208,7 +195,6 @@ header {
 
 #stadium-image {
   width: 600px;
-  margin-left: 10px;
   border-radius: 12px;
 }
 
@@ -222,14 +208,9 @@ header {
   padding-right: 15px;
 }
 
-/*#home-team-name {
-  padding: 0;
-  margin: 0;
-}*/
-
 #league-table {
   margin: 8px;
-  position: sticky;
+  /*position: sticky;*/
   width: 380px;
   height: 750px;
   border: black;
@@ -247,18 +228,11 @@ header {
 #mode {
   float: right;
   margin-right: 10px;
-  margin-left: 10px;
   max-height: 40px;
   font-size: 20px;
   background-color: #dddddd;
   border-radius: 5px;
 }
-
-/*#display-journey-time {
-  background-color: dodgerblue;
-  position: absolute;
-  bottom: 0;
-}*/
 
 .crest {
   margin-right: -30px;
@@ -403,14 +377,34 @@ td {
   float: right;
 }
 
-@media (max-width: 600px) {
+/*@media (max-width: 700px) {
 
+  #stadium-image {
+    width: 250px;
+  }
 
-}
+  #instructions-container {
+    width: 250px;
+  }
 
-@media (max-width: 900px) {
+  #away-fixture-info-div {
+    max-width: 500px;
+  }
 
-}
+  #instructions-div {
+    margin-right: 15px;
+    font-size: 12px;
+    padding: 7px;
+    height: 400px;
+  }
+
+  #main-map {
+    margin-left: 10px;
+    height: 400px;
+    width: 250px;
+  }
+
+}*/
 
 @media (min-width: 1000px) and (max-width: 1400px) {
 
@@ -435,8 +429,39 @@ td {
     margin-top: 105px;
   }
 
-  #main-div {
-      width: 35%
+  #back-button {
+    max-height: 23px;
+    font-size: 14px;
+  }
+
+  #mode {
+    margin-left: 30px;
+    height: 30px;
+  }
+
+  #away-fixture-info-div {
+    margin-top: 20px;
+  }
+
+  .fixture-crest {
+    height: 175px;
+    width: 175px;
+  }
+
+  #stadium-image {
+    width: 500px;
+  }
+
+  #instructions-container {
+    width: 500px;
+    padding: 10px;
+  }
+
+  #instructions-div {
+    margin-right: 15px;
+    font-size: 15px;
+    padding: 7px;
+    height: 400px;
   }
 
   #table-div {
@@ -460,15 +485,13 @@ td {
   #league-table {
     font-size: 10px;
     max-width: 290px;
-    position: relative;
     margin-top: 20px;
   }
 
   #main-map {
-    border-radius: 12px;
     margin-left: 15px;
-    height: 300px;
-    width: 200px;
+    height: 400px;
+    width: 300px;
   }
 
   #team-dropdown {
