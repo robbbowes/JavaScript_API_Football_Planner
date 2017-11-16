@@ -2,9 +2,14 @@
   "name": "javascript_api_football_planner",
   "version": "1.0.0",
   "main": "server/server.js",
+  "engines": {
+    "node": "8.6.0",
+    "npm": "5.5.1"
+  },
   "scripts": {
     "test": "mocha specs",
-    "build": "cd client && webpack -w"
+    "build": "cd client && webpack -w",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

@@ -8,6 +8,8 @@ app.use("/api/clubExtras", club_router);
 app.use("/api/tableData", table_router);
 app.use(express.static(__dirname + '/../client/build'))
 
-app.listen(3000, function () {
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, function () {
   console.log("App running");
 })
