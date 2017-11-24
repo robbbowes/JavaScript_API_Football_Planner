@@ -32,3 +32,13 @@ MVP:
 Select start and finish locations for their route
 Save routes to a wishlist
 Mark completed routes as ‘done’
+
+____________________________________________
+
+What I/we would like to improve going forward:
+
+App.js is gigantic.  There is a ton of code that could be abstracted away and imported in.
+
+Had we been able to use a framework rather than purely vanilla JS a fair few issues could have been avoided.
+
+CSS styling needs to be improved.  The media queries ensure that it's responsive, however the page with the individual fixtures on could be tidied up a fair bit.
